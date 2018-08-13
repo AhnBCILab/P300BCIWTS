@@ -32,12 +32,6 @@ namespace UIVA_Server
         // Server
         ButtonRemote buttRemote;
 
-        // Data buffers
-        public double channel_val;    // signal data(serial)
-        public int num_channel;  // number of channels
-        public bool buttA;       // Button A
-        public bool buttZ;       // Button Z
-        public DateTime anaTimeStamp;   // Time event for analog events
         public DateTime buttTimeStamp;  // Time event for button events
 
         public bool b_up = false;

@@ -1,7 +1,7 @@
 <OpenViBE-Scenario>
 	<FormatVersion>1</FormatVersion>
 	<Creator>OpenViBE Designer</Creator>
-	<CreatorVersion>2.0.0</CreatorVersion>
+	<CreatorVersion>2.1.0</CreatorVersion>
 	<Settings></Settings>
 	<Inputs></Inputs>
 	<Outputs></Outputs>
@@ -369,7 +369,7 @@
 				</Attribute>
 				<Attribute>
 					<Identifier>(0x8d21ff41, 0xdf6afe7e)</Identifier>
-					<Value>C:/Users/Ahn-Lab/Desktop/OpenVibe process algorithm/data/xDAWN.cfg</Value>
+					<Value>D:/Everything in UIVA/P300 git/P300/OPENVIBE/scenario/xDAWN.cfg</Value>
 				</Attribute>
 				<Attribute>
 					<Identifier>(0xc80ce8af, 0xf699f813)</Identifier>
@@ -1144,7 +1144,7 @@
 					<TypeIdentifier>(0xb0d0db45, 0x49cbc34a)</TypeIdentifier>
 					<Name>Lua Script</Name>
 					<DefaultValue></DefaultValue>
-					<Value>C:/Users/Ahn-Lab/Desktop/OpenVibe process algorithm/scenario/Synchronizer.lua</Value>
+					<Value>D:/Everything in UIVA/P300 git/P300/OPENVIBE/scenario/Synchronizer.lua</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 				<Setting>
@@ -1737,7 +1737,7 @@
 					<TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
 					<Name>Filename to load configuration from</Name>
 					<DefaultValue></DefaultValue>
-					<Value>C:/Users/Ahn-Lab/Desktop/OpenVibe process algorithm/scenario/p300-classifier.cfg</Value>
+					<Value>D:/Everything in UIVA/P300 git/P300/OPENVIBE/scenario/p300-classifier.cfg</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 			</Settings>
@@ -1805,7 +1805,7 @@
 					<TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
 					<Name>Filename to load configuration from</Name>
 					<DefaultValue></DefaultValue>
-					<Value>C:/Users/Ahn-Lab/Desktop/OpenVibe process algorithm/scenario/p300-classifier.cfg</Value>
+					<Value>D:/Everything in UIVA/P300 git/P300/OPENVIBE/scenario/p300-classifier.cfg</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 			</Settings>
@@ -1873,7 +1873,7 @@
 					<TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
 					<Name>Filename to load configuration from</Name>
 					<DefaultValue></DefaultValue>
-					<Value>C:/Users/Ahn-Lab/Desktop/OpenVibe process algorithm/scenario/p300-classifier.cfg</Value>
+					<Value>D:/Everything in UIVA/P300 git/P300/OPENVIBE/scenario/p300-classifier.cfg</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 			</Settings>
@@ -1941,7 +1941,7 @@
 					<TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
 					<Name>Filename to load configuration from</Name>
 					<DefaultValue></DefaultValue>
-					<Value>C:/Users/Ahn-Lab/Desktop/OpenVibe process algorithm/scenario/p300-classifier.cfg</Value>
+					<Value>D:/Everything in UIVA/P300 git/P300/OPENVIBE/scenario/p300-classifier.cfg</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 			</Settings>
