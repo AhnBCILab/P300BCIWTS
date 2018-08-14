@@ -146,7 +146,7 @@ public class UIVA_Client
     {
         try
         {
-            Buffer.BlockCopy(blankBuffer, 0, recBuffer, 0, 6);
+            Buffer.BlockCopy(blankBuffer, 0, recBuffer, 0, 6); //buffer initialization
             socClient.Receive(recBuffer);
             recStr = Encoding.Default.GetString(recBuffer);
             //Remove the tailing '\0's after the '\n' token, caused by the buffer size
@@ -180,34 +180,6 @@ public class UIVA_Client
         GetDirectionData(1, out butt);
     }
 
-    public void GetOrder()
-    {
-        SendMessage(String.Format("Biosemi?{0}?\n", 1));
-        ReceiveMessage();
-        /*try
-        {
-            socClient.Receive(odrBuffer);
-            odrStr = Encoding.Default.GetString(odrBuffer);
-            Console.WriteLine("Order string: " + odrStr);
-            //Remove the tailing '\0's after the '\n' token, caused by the buffer size
-            int ixEnd = odrStr.IndexOf('\n');
-            odrStr = odrStr.Remove(ixEnd);
-        }
-        catch (Exception e)
-        {
-            Exception recError = new Exception(e.ToString()
-                                    + "Client failed to receive message.\n");
-            throw recError;
-        }*/
-        try
-        {
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e.ToString() + "\n\nRECEIVED FROM UIVA_SERVER: " + recStr);
-        }
-    }
-
     /// <summary>
     /// Communicate to UIVA in reverse    
     public void Press(int num)
@@ -218,11 +190,6 @@ public class UIVA_Client
     public void Press_O(int num)
     {
         SendMessage(String.Format("Press_O?{0}?\n", num));
-    }
-
-    public void Release(int num)
-    {
-        SendMessage(String.Format("Release?{0}?\n", num));
     }
 
     /// </summary>
