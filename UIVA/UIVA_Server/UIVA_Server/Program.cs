@@ -87,7 +87,7 @@ namespace UIVA_Server      // Unity Indie VRPN Adapter
         private string sendStr = "";                // String going to be send
         private byte[] orderBuffer = new byte[100];
         private string sendOrder = "";
-        private string ArrowDirection = "";
+        private string ButtonNum = "";
         private int i = 0;
         private int j = 0;
         private ASCIIEncoding encoder;              // Encoding, decoding
@@ -204,28 +204,40 @@ namespace UIVA_Server      // Unity Indie VRPN Adapter
                                 sendStr = "Ready!\n";
                                 break;
 
-                            case "Press":
+                            case "Press": //target과 nontarget을 구분하기 위해 target은 1의 자리가 1이 되고 nontarget은 0이 된다.
                                 butts = System.Convert.ToInt32(tokens[1]);
                                 i = butts / 10;
                                 j = butts % 10;
                                 switch (i)
                                 {
-                                    case 0: // Up arrow
-                                        ArrowDirection = "Up";
+                                    case 0:
+                                        ButtonNum = "Zero";
                                         break;
-                                    case 1: // Down arrow
-                                        ArrowDirection = "Down";
+                                    case 1:
+                                        ButtonNum = "One";
                                         break;
-                                    case 2: // Left arrow
-                                        ArrowDirection = "Left";
+                                    case 2:
+                                        ButtonNum = "Two";
                                         break;
-                                    case 3: // Right arrow
-                                        ArrowDirection = "Right";
+                                    case 3:
+                                        ButtonNum = "Three";
+                                        break;
+                                    case 4:
+                                        ButtonNum = "Four";
+                                        break;
+                                    case 5:
+                                        ButtonNum = "Five";
+                                        break;
+                                    case 6:
+                                        ButtonNum = "Six";
+                                        break;
+                                    case 7:
+                                        ButtonNum = "Seven";
                                         break;
                                     default:
                                         break;
                                 }
-                                Console.WriteLine("\nBlink " + ArrowDirection + "\nSending button " + j);
+                                Console.WriteLine("\nBlink " + ButtonNum + "\nSending button " + j);
                                 buttonServer[0].Press(j);
                                 sendStr = "";
                                 break;
@@ -234,22 +246,34 @@ namespace UIVA_Server      // Unity Indie VRPN Adapter
                                 butts = System.Convert.ToInt32(tokens[1]);
                                 switch (butts)
                                 {
-                                    case 0: // Up arrow
-                                        ArrowDirection = "Up";
+                                    case 0:
+                                        ButtonNum = "Zero";
                                         break;
-                                    case 1: // Down arrow
-                                        ArrowDirection = "Down";
+                                    case 1:
+                                        ButtonNum = "One";
                                         break;
-                                    case 2: // Left arrow
-                                        ArrowDirection = "Left";
+                                    case 2:
+                                        ButtonNum = "Two";
                                         break;
-                                    case 3: // Right arrow
-                                        ArrowDirection = "Right";
+                                    case 3:
+                                        ButtonNum = "Three";
+                                        break;
+                                    case 4:
+                                        ButtonNum = "Four";
+                                        break;
+                                    case 5:
+                                        ButtonNum = "Five";
+                                        break;
+                                    case 6:
+                                        ButtonNum = "Six";
+                                        break;
+                                    case 7:
+                                        ButtonNum = "Seven";
                                         break;
                                     default:
                                         break;
                                 }
-                                Console.WriteLine("\nBlink " + ArrowDirection + "\nSending button " + butts);
+                                Console.WriteLine("\nBlink " + ButtonNum + "\nSending button " + butts);
                                 buttonServer[0].Press(butts);
                                 sendStr = "";
                                 break;

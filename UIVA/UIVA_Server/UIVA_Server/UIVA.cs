@@ -32,10 +32,14 @@ namespace UIVA_Server
         // Server
         ButtonRemote buttRemote;
 
-        public bool b_up = false;
-        public bool b_down = false;
-        public bool b_left = false;
-        public bool b_right = false;
+        public bool b_0 = false;
+        public bool b_1 = false;
+        public bool b_2 = false;
+        public bool b_3 = false;
+        public bool b_4 = false;
+        public bool b_5 = false;
+        public bool b_6 = false;
+        public bool b_7 = false;
 
         public VRPN_ButtonServer(string ID)
         {
@@ -49,17 +53,29 @@ namespace UIVA_Server
             //Console.Write("button changed!");
             switch (e.Button)
             {
-                case 0: // Up arrow
-                    b_up = true;
+                case 0:
+                    b_0 = true;
                     break;
-                case 1: // Down arrow
-                    b_down = true;
+                case 1:
+                    b_1 = true;
                     break;
-                case 2: // Left arrow
-                    b_left = true;
+                case 2:
+                    b_2 = true;
                     break;
-                case 3: // Right arrow
-                    b_right = true;
+                case 3:
+                    b_3 = true;
+                    break;
+                case 4:
+                    b_4 = true;
+                    break;
+                case 5:
+                    b_5 = true;
+                    break;
+                case 6:
+                    b_6 = true;
+                    break;
+                case 7:
+                    b_7 = true;
                     break;
                 default:
                     break;
@@ -75,10 +91,14 @@ namespace UIVA_Server
         {
             String buttStr = "";
             // Uppercase for button press, lowercase for button release
-            if (b_up) { buttStr = "Zero\n"; b_up = false; }
-            else if (b_down) { buttStr = "One\n"; b_down = false; }
-            else if (b_left) { buttStr = "Two\n"; b_left = false; }
-            else if (b_right) { buttStr = "Three\n"; b_right = false; }
+            if (b_0) { buttStr = "Zero\n"; b_0 = false; }
+            else if (b_1) { buttStr = "One\n"; b_1 = false; }
+            else if (b_2) { buttStr = "Two\n"; b_2 = false; }
+            else if (b_3) { buttStr = "Three\n"; b_3 = false; }
+            else if (b_4) { buttStr = "Four\n"; b_4 = false; }
+            else if (b_5) { buttStr = "Five\n"; b_5 = false; }
+            else if (b_6) { buttStr = "Six\n"; b_6 = false; }
+            else if (b_7) { buttStr = "Seven\n"; b_7 = false; }
             else { buttStr = "No_Value\n"; }
             return buttStr;
         }
@@ -89,7 +109,7 @@ namespace UIVA_Server
         // Server
         ButtonServer buttServer;
         Connection vrpnConnection;
-        int buttNums = 4;  // You can use the number of buttons as you need by chainging this value.
+        int buttNums = 8;  // You can use the number of buttons as you need by chainging this value.
 
         public UIVA_ButtonServer()
         {
