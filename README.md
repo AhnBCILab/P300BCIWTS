@@ -13,6 +13,6 @@ The following figure is the system diagram of WTS.
 ![WTS_SystemDiagram](./Image/WTS_SystemDiagram.png)
 
 WTS system proceeds as follows.
-![WTS_Flowchart](./Image/WTS_Flowchart.png)
+![WTS_Flowchart](./Image/WTS_Flowchart.jpg)
 
 See the WTS_Documentation.pdf file for details.
