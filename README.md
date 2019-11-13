@@ -15,4 +15,4 @@
 ### WTS system proceeds as follows.
 ![WTS_Flowchart](./Image/WTS_Flowchart.jpg)
 
-## See the WTS_Documentation.pdf file for details.
+### See the WTS_Documentation.pdf file for details.
