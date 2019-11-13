@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: e2093c4c795014cbfb9cd25eeb1f9a89
+  - enabled: 1
+    path: Assets/Scenes/Training.unity
+    guid: ae029c9dba641ba498f7b1da824759b1
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/NorthAmerica.unity
+    guid: c3f888ea7204d54438faa58eff1e1fb6
+  - enabled: 1
+    path: Assets/Scenes/SouthAmerica.unity
+    guid: 76954fa153af110409b9ba9909781fd0
+  - enabled: 1
+    path: Assets/Scenes/Asia.unity
+    guid: 2861a5cbcd2046749be8aae41aab0fca
+  - enabled: 1
+    path: Assets/Scenes/Africa.unity
+    guid: 6db3a0c55e58600429b94d826ef029b4
+  - enabled: 1
+    path: Assets/Scenes/Oceania.unity
+    guid: 7261c00fe978fff4ca4e30fc61fc22ad
+  - enabled: 1
+    path: Assets/Scenes/Europe.unity
+    guid: b18c49462228ffa4bb20bb3ab554d07a
+  - enabled: 1
+    path: Assets/Scenes/Seoul.unity
+    guid: 4752b7554e6f6784db0e9360c4820337
+  - enabled: 1
+    path: Assets/Scenes/Dubai.unity
+    guid: d0847f405a66c8748a64cf1cba0ea39e
+  - enabled: 1
+    path: Assets/Scenes/Hongkong.unity
+    guid: 3b097cf74da87634bb9b89c9565576d7
+  - enabled: 1
+    path: Assets/Scenes/India.unity
+    guid: 7385524f941b3b44eb7d6020b986e496
+  - enabled: 1
+    path: Assets/Scenes/Shanghai.unity
+    guid: 1d06d7dc769b007429da94d9a1db2f35
+  - enabled: 1
+    path: Assets/Scenes/Tokyo.unity
+    guid: 2ef9aabfdcc00224fa887874bb32612f
+  - enabled: 1
+    path: Assets/Scenes/Alaska.unity
+    guid: 65c9079c35556a44d9e568d63d8e3eb3
+  - enabled: 1
+    path: Assets/Scenes/Barcelona.unity
+    guid: 0c405e4570087a049a4d84e5e1a541cc
+  - enabled: 1
+    path: Assets/Scenes/Chicago.unity
+    guid: 7a66b560df13e5a4ebe247b2bdd764e0
+  - enabled: 1
+    path: Assets/Scenes/LA.unity
+    guid: bdc40a81d3ae3b14ab700d0bb9b3b996
+  - enabled: 1
+    path: Assets/Scenes/Iceland.unity
+    guid: da74ef00a3932fa4c9764fd88e640cb6
+  - enabled: 1
+    path: Assets/Scenes/Firenze.unity
+    guid: 053f07dda4bf8c145a0d6f978d8ef0e0
+  - enabled: 1
+    path: Assets/Scenes/Lasvegas.unity
+    guid: 0cd12a0d5123db941a273d62b2797097
+  - enabled: 1
+    path: Assets/Scenes/London.unity
+    guid: 41c4a6ea1d380dc40926f79e139fe285
+  - enabled: 1
+    path: Assets/Scenes/Paris.unity
+    guid: 919538238788d014d8f48eb72884ce7b
+  - enabled: 1
+    path: Assets/Scenes/Rome.unity
+    guid: 1ff8e1ba0b38f454a89a18df4c2cd0a3
+  - enabled: 1
+    path: Assets/Scenes/Newyork.unity
+    guid: 6d43eef1e3b36dc43b1e1b993b6a356c
+  - enabled: 1
+    path: Assets/Scenes/Vancouver.unity
+    guid: aec67df011cfa9948b48c6a62f4b8207
+  - enabled: 1
+    path: Assets/Scenes/Egypt.unity
+    guid: 9289936961d235b4ab5744687ada0f32
+  - enabled: 1
+    path: Assets/Scenes/Capetown.unity
+    guid: 85c0650bbfa7df3499ca8014c79c5d03
+  - enabled: 1
+    path: Assets/Scenes/Ethiopia.unity
+    guid: bf365c3b432d05f4faf1c9ed3b9c4ab0
+  - enabled: 1
+    path: Assets/Scenes/Johannesburg.unity
+    guid: 2d025562282c7714eb716a8df257eb74
+  - enabled: 1
+    path: Assets/Scenes/Nairobi.unity
+    guid: bd53ea51e85528c4c914073dbe267e85
+  - enabled: 1
+    path: Assets/Scenes/Pretoria.unity
+    guid: d73f4300d0c17fd4aa61506c86622e43
+  - enabled: 1
+    path: Assets/Scenes/Fiji.unity
+    guid: 83b7e01517fe5394bb6f6c3ff8ca6bec
+  - enabled: 1
+    path: Assets/Scenes/Wellington.unity
+    guid: 41c99b66e762fc340b7ca73444bcba9e
+  - enabled: 1
+    path: Assets/Scenes/Vanuatu.unity
+    guid: 1e89b3ce1f3d49d40872a989817d53b4
+  - enabled: 1
+    path: Assets/Scenes/PortMoresby.unity
+    guid: 8f1fe5f0de2762b4c8671bd035b36d58
+  - enabled: 1
+    path: Assets/Scenes/Melbourne.unity
+    guid: 9ed8f8994b1623a4b991d8ff95181cb0
+  - enabled: 1
+    path: Assets/Scenes/Sydney.unity
+    guid: 674ed9013c7b26e49be58ab748126cfe
+  - enabled: 1
+    path: Assets/Scenes/Barbados.unity
+    guid: 44d8f8d73ddeb9c4cbfc7a4afa680804
+  - enabled: 1
+    path: Assets/Scenes/BuenosAires.unity
+    guid: 41923f53308367245a8bef5250099326
+  - enabled: 1
+    path: Assets/Scenes/Cusco.unity
+    guid: aba73109c0a29dc41a73465362dd675e
+  - enabled: 1
+    path: Assets/Scenes/EasterIsland.unity
+    guid: 927c515ccd99e3340b5f6f176b3a50e6
+  - enabled: 1
+    path: Assets/Scenes/Patagonia.unity
+    guid: b0a4e21ee748d8d4486ddb098c6a0d2a
+  - enabled: 1
+    path: Assets/Scenes/RiodeJaneiro.unity
+    guid: 29322edb49de591418351c1eda0a4795
+  m_configObjects: {}
