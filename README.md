@@ -3,6 +3,7 @@
 
 **System Overview**
 -------------------
+
 ## World Tour System (WTS) is a world tour BCI application using P300 brain waves.
 
 ### The system is divided into two types depending on the existence of a training session:
