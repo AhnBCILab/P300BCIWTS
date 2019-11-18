@@ -62,11 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AcquiringBlink.cs" />
+    <Compile Include="Assets\Scripts\AcquiringButton.cs" />
     <Compile Include="Assets\Scripts\AfricaBlink.cs" />
     <Compile Include="Assets\Scripts\AsiaBlink.cs" />
     <Compile Include="Assets\Scripts\Blink.cs" />
     <Compile Include="Assets\Scripts\ChangeOrder.cs" />
     <Compile Include="Assets\Scripts\ChangeText.cs" />
+    <Compile Include="Assets\Scripts\ChangeText2.cs" />
     <Compile Include="Assets\Scripts\EuropeBlink.cs" />
     <Compile Include="Assets\Scripts\InputName.cs" />
     <Compile Include="Assets\Scripts\MovingWorld.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="Assets\Scripts\TrainingButton.cs" />
     <Compile Include="Assets\Scripts\VideoEnd.cs" />
     <None Include="Assets\StreamingAssets\SanghumWoo.txt" />
+    <None Include="Assets\Videos\Video Sources.txt" />
     <None Include="Assets\StreamingAssets\SanghumWoo@192643.txt" />
     <None Include="Assets\StreamingAssets\SanghumWoo192147.txt" />
     <Reference Include="Unity.Timeline.Editor">

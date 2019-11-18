@@ -12,6 +12,7 @@ public class InputName : MonoBehaviour
     public GameObject Background_world;
     public GameObject Play;
     public GameObject Training;
+    public GameObject DataAcquire;
     public GameObject Quit;
     public GameObject FitstScene;
 
@@ -59,6 +60,7 @@ public class InputName : MonoBehaviour
             Background_world.SetActive(true);
             Play.SetActive(true);
             Training.SetActive(true);
+            DataAcquire.SetActive(true);
             Quit.SetActive(true);
         }
     }
@@ -82,6 +84,7 @@ public class InputName : MonoBehaviour
         Background_world.SetActive(true);
         Play.SetActive(true);
         Training.SetActive(true);
+        DataAcquire.SetActive(true);
         Quit.SetActive(true);
     }
 }

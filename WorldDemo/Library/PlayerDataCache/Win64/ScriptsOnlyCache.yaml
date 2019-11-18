@@ -1,10 +1,13 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AcquiringBlink
+    - AcquiringButton
     - AfricaBlink
     - AsiaBlink
     - Blink
     - ChangeText
+    - ChangeText2
     - EuropeBlink
     - InputName
     - MovingWorld
@@ -33,6 +36,55 @@ ScriptsOnlyBuild:
     - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
+    Assets/Scenes/AcquiringData.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9436}
+    - Class: 114
+      Script: {instanceID: 9438}
+    - Class: 114
+      Script: {instanceID: 9450}
+    - Class: 114
+      Script: {instanceID: 9458}
+    - Class: 114
+      Script: {instanceID: 9496}
+    - Class: 114
+      Script: {instanceID: 10508}
+    - Class: 114
+      Script: {instanceID: 10636}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
+      Script: {instanceID: 0}
     Assets/Scenes/Africa.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -71,7 +123,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10368}
     - Class: 114
-      Script: {instanceID: 10578}
+      Script: {instanceID: 10580}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -968,11 +1020,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10332}
     - Class: 114
-      Script: {instanceID: 10722}
+      Script: {instanceID: 10726}
     - Class: 114
-      Script: {instanceID: 10754}
+      Script: {instanceID: 10758}
     - Class: 114
-      Script: {instanceID: 10788}
+      Script: {instanceID: 10792}
+    - Class: 114
+      Script: {instanceID: 20970}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1146,7 +1200,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10368}
     - Class: 114
-      Script: {instanceID: 10808}
+      Script: {instanceID: 10812}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1449,7 +1503,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10368}
     - Class: 114
-      Script: {instanceID: 10786}
+      Script: {instanceID: 10790}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1560,7 +1614,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10044}
     - Class: 114
-      Script: {instanceID: 10650}
+      Script: {instanceID: 10654}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -2411,6 +2465,12 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
+      Hash: 76671817a05a4ccb8c0029bd750f9ee3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AcquiringBlink
+  - hash:
+      serializedVersion: 2
       Hash: ab4b2dfb12aaf759e8b44684188d4086
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -2441,6 +2501,12 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
+      Hash: b80797a8e31aa95b92ea0212a15bf8b2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChangeText2
+  - hash:
+      serializedVersion: 2
       Hash: 76671817a05a4ccb8c0029bd750f9ee3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -2465,7 +2531,7 @@ ScriptsOnlyBuild:
     className: TMP_ColorGradient
   - hash:
       serializedVersion: 2
-      Hash: 940ed7777e6f6730d266e30ea7b81de8
+      Hash: 45c337c1ba86f5f4eb7577a549e1efb1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InputName
@@ -2517,11 +2583,18 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AcquiringButton
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Training.unity
   - Assets/Scenes/Main.unity
+  - Assets/Scenes/AcquiringData.unity
   - Assets/Scenes/NorthAmerica.unity
   - Assets/Scenes/SouthAmerica.unity
   - Assets/Scenes/Asia.unity
@@ -2564,4 +2637,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/EasterIsland.unity
   - Assets/Scenes/Patagonia.unity
   - Assets/Scenes/RiodeJaneiro.unity
-  playerPath: C:/Users/user/WorldDemo/World_200/WorldTravelSystem.exe
+  playerPath: C:/Users/user/WorldSystem/WorldDemo/World_200/WorldTravelSystem.exe
