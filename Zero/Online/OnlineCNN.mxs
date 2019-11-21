@@ -90,7 +90,7 @@
 					<TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
 					<Name>Filename</Name>
 					<DefaultValue>record-[$core{date}-$core{time}].ov</DefaultValue>
-					<Value>C:/Users/wldk5/WorldSystem/Zero/Online/Data/ZeroOnlineSession-[$core{date}-$core{time}].ov</Value>
+					<Value>C:/Users/wldk5/WorldSystem/Zero/Online/Data/ZeroOnline-[$core{date}-$core{time}].ov</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 				<Setting>
