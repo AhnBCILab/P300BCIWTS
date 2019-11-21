@@ -102,6 +102,10 @@ public class Blink : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene("Menu");
+        }
         current_time += Time.deltaTime;
         //Restart blinking
         if (current_time > 5.0f && blinkstate == true)

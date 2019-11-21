@@ -1586,8 +1586,8 @@ MonoBehaviour:
   num_of_blink_arrow: 2
   current_time: 0
   interval: 0.0625
-  startDelay: 0.1
-  timebetweenarrows: 0.1
+  startDelay: 0.0627
+  timebetweenarrows: 0.0628
   finish: 7
   start: 8
   blinkcnt: 0

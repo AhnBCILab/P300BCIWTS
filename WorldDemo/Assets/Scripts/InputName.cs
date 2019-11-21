@@ -17,6 +17,8 @@ public class InputName : MonoBehaviour
     public GameObject FitstScene;
 
     public static string patient_id = "";
+    public static string Real_id = "";
+    public static int number = 1;
     private static InputName s_Instance = null;
     // Start is called before the first frame update
     void Start()
@@ -75,8 +77,8 @@ public class InputName : MonoBehaviour
         GameObject a = questionGroup.transform.Find("InputField").gameObject;
         result.Answer = a.transform.Find("Text").GetComponent<Text>().text;
         FileInfo fi = new FileInfo(Application.dataPath + "/StreamingAssets/" + result.Answer + ".txt");
-        if (fi.Exists) patient_id = result.Answer + "@" + DateTime.Now.ToString("HHmmss");
-        else patient_id = result.Answer;
+        patient_id = result.Answer;
+        Real_id = result.Answer;
     }
     public void Enter()
     {
