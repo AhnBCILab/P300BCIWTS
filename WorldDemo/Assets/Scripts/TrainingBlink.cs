@@ -60,6 +60,10 @@ public class TrainingBlink : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene("Menu");
+        }
         current_time += Time.deltaTime;
         if (targetChange == 6 && current_time < 10.0f)
         {
@@ -82,7 +86,7 @@ public class TrainingBlink : MonoBehaviour
             blinkcnt = 0;
             BlinkButton();
         }
-        else if (current_time > 55.0f)
+        else if (current_time > 41.0f)
         {
             current_time = 0.0f;
             blinkstate = true;

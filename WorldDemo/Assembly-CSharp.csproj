@@ -83,15 +83,8 @@
     <Compile Include="Assets\Scripts\TrainingBlink.cs" />
     <Compile Include="Assets\Scripts\TrainingButton.cs" />
     <Compile Include="Assets\Scripts\VideoEnd.cs" />
-    <None Include="Assets\StreamingAssets\SanghumWoo5.txt" />
-    <None Include="Assets\StreamingAssets\SanghumWoo.txt" />
-    <None Include="Assets\StreamingAssets\SanghumWoo1.txt" />
     <None Include="Assets\Videos\Video Sources.txt" />
-    <None Include="Assets\StreamingAssets\SanghumWoo@192643.txt" />
-    <None Include="Assets\StreamingAssets\SanghumWoo12.txt" />
-    <None Include="Assets\StreamingAssets\SanghumWoo2.txt" />
-    <None Include="Assets\StreamingAssets\SanghumWoo4.txt" />
-    <None Include="Assets\StreamingAssets\SanghumWoo3.txt" />
+    <None Include="Assets\StreamingAssets\asdasdasd.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/user/WorldSystem/WorldDemo/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

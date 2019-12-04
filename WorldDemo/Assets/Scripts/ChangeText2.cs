@@ -11,6 +11,8 @@ public class ChangeText2 : MonoBehaviour
     public float current_time = 0.0f;
     public int[] traintext = new int[] { 1, 2, 3, 4, 5, 6 };
     int arrownumber = 0;
+    int repeat = 0;
+
     //bool blinkstate = true;
     Text text;
 
@@ -27,7 +29,7 @@ public class ChangeText2 : MonoBehaviour
         current_time += Time.deltaTime;
         if (current_time < 2.0f)
         {
-            if (arrownumber == 6)
+            if (arrownumber == 6 && repeat == 1)
             {
                 text.text = "Finish";                
             }
@@ -64,6 +66,11 @@ public class ChangeText2 : MonoBehaviour
         {
             current_time = 0.0f;
             arrownumber++;
+            //if (arrownumber == 6 && repeat == 0)
+            //{
+            //    arrownumber = 0;
+            //    repeat++;
+            //}
             //blinkstate = true;
         }
     }
@@ -92,7 +99,7 @@ public class ChangeText2 : MonoBehaviour
         }
         else if (arrow == 6)
         {
-            text.text = "Look at 6 button";
+            text.text = "Look at    6    button";
         }
     }
 }

@@ -11,6 +11,7 @@ public class ChangeText : MonoBehaviour
     public float current_time = 0.0f;
     public int[] traintext = new int[] { 1, 2, 3, 4, 5, 6 };
     int arrownumber = 0;
+
     //bool blinkstate = true;
     Text text;
 
@@ -32,7 +33,7 @@ public class ChangeText : MonoBehaviour
             }
             else text.text = "Wait...";
         }
-        else if (current_time > 2.0f && current_time < 55.0f)
+        else if (current_time > 2.0f && current_time < 41.0f)
         {
             if (arrownumber == 0)
             {
@@ -59,7 +60,7 @@ public class ChangeText : MonoBehaviour
                 PrintNextArrow(traintext[arrownumber]);
             }
         }
-        else if (current_time > 55.0f)
+        else if (current_time > 41.0f)
         {
             current_time = 0.0f;
             arrownumber++;
@@ -91,7 +92,7 @@ public class ChangeText : MonoBehaviour
         }
         else if (arrow == 6)
         {
-            text.text = "Look at 6 button";
+            text.text = "Look at    6    button";
         }
     }
 }

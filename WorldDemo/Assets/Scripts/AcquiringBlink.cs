@@ -101,11 +101,11 @@ public class AcquiringBlink : MonoBehaviour
             {
                 but0 = false;
 
-                if (ranArr[targetChange] == rndnum)
-                    buttonIndexNum = 1;
-                else
-                    buttonIndexNum = 0;
-                //buttonIndexNum = 1;
+                //if (ranArr[targetChange] == rndnum)
+                //    buttonIndexNum = 1;
+                //else
+                //    buttonIndexNum = 0;
+                buttonIndexNum = 1;
                 theSender.send(buttonIndexNum);
 
                 pubimg = Button0;
@@ -126,11 +126,11 @@ public class AcquiringBlink : MonoBehaviour
             {
                 but1 = false;
 
-                if (ranArr[targetChange] == rndnum)
-                    buttonIndexNum = 1;
-                else
-                    buttonIndexNum = 0;
-                //buttonIndexNum = 2;
+                //if (ranArr[targetChange] == rndnum)
+                //    buttonIndexNum = 1;
+                //else
+                //    buttonIndexNum = 0;
+                buttonIndexNum = 2;
                 theSender.send(buttonIndexNum);
 
                 pubimg = Button1;
@@ -152,11 +152,11 @@ public class AcquiringBlink : MonoBehaviour
             {
                 but2 = false;
 
-                if (ranArr[targetChange] == rndnum)
-                    buttonIndexNum = 1;
-                else
-                    buttonIndexNum = 0;
-                //buttonIndexNum = 3;
+                //if (ranArr[targetChange] == rndnum)
+                //    buttonIndexNum = 1;
+                //else
+                //    buttonIndexNum = 0;
+                buttonIndexNum = 3;
                 theSender.send(buttonIndexNum);
 
                 pubimg = Button2;
@@ -178,11 +178,11 @@ public class AcquiringBlink : MonoBehaviour
             {
                 but3 = false;
 
-                if (ranArr[targetChange] == rndnum)
-                    buttonIndexNum = 1;
-                else
-                    buttonIndexNum = 0;
-                //buttonIndexNum = 4;
+                //if (ranArr[targetChange] == rndnum)
+                //    buttonIndexNum = 1;
+                //else
+                //    buttonIndexNum = 0;
+                buttonIndexNum = 4;
                 theSender.send(buttonIndexNum);
 
                 pubimg = Button3;
@@ -205,11 +205,11 @@ public class AcquiringBlink : MonoBehaviour
             {
                 but4 = false;
 
-                if (ranArr[targetChange] == rndnum)
-                    buttonIndexNum = 1;
-                else
-                    buttonIndexNum = 0;
-                //buttonIndexNum = 5;
+                //if (ranArr[targetChange] == rndnum)
+                //    buttonIndexNum = 1;
+                //else
+                //    buttonIndexNum = 0;
+                buttonIndexNum = 5;
                 theSender.send(buttonIndexNum);
 
                 pubimg = Button4;
@@ -232,11 +232,11 @@ public class AcquiringBlink : MonoBehaviour
             {
                 but5 = false;
 
-                if (ranArr[targetChange] == rndnum)
-                    buttonIndexNum = 1;
-                else
-                    buttonIndexNum = 0;
-                //buttonIndexNum = 6;
+                //if (ranArr[targetChange] == rndnum)
+                //    buttonIndexNum = 1;
+                //else
+                //    buttonIndexNum = 0;
+                buttonIndexNum = 6;
                 theSender.send(buttonIndexNum);
 
                 pubimg = Button5;
@@ -269,6 +269,11 @@ public class AcquiringBlink : MonoBehaviour
         else
         {
             targetChange++;
+            //if (targetChange == 6 && repeat == 0)
+            //{
+            //    targetChange = 0;
+            //    repeat++;
+            //}
         }
     }
     public void ToggleState()
