@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("C:/Users/wldk5/WorldSystem/SourceCode")
+sys.path.append("C:/Users/user/WorldSystem/SourceCode")
 import ProcessingWorld
 
 class MyOVBox(OVBox):
@@ -15,10 +15,10 @@ class MyOVBox(OVBox):
             stims = np.zeros((1,3))
             trigger = 0.
             #filename = 'C:/Users/Ahn-Lab/Documents/SelectedFeatures.pickle' # Training data and selectedFeature index information are stored in this file.
-            eegData_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/eegData.out'
-            stims_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/stims.out'
-            start_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/start.out'
-            result_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/result.out'
+            eegData_txt = 'C:/Users/user/WorldSystem/Zero/CNNtemp/eegData.out'
+            stims_txt = 'C:/Users/user/WorldSystem/Zero/CNNtemp/stims.out'
+            start_txt = 'C:/Users/user/WorldSystem/Zero/CNNtemp/start.out'
+            result_txt = 'C:/Users/user/WorldSystem/Zero/CNNtemp/result.out'
             ProcessingWorld.start_txt_trigger(start_txt)
             
 	def process(self):

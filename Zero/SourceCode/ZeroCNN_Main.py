@@ -3,6 +3,8 @@ from scipy.signal import butter, lfilter
 import time
 import os
 from keras.models import load_model
+import shutil
+from datetime import datetime
 
 ### The Methods for Signal Processing ###
 def Downsampling(eegData, downsampleRate):
@@ -64,12 +66,16 @@ def DownsamplingOnlineEpoch(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6
 
 def main():
         #load cnn model and predict result
-        model = load_model('C:/Users/wldk5/WorldSystem/Zero/ZeroModel/ZeroCNN.h5')
+        model = load_model('C:/Users/user/WorldSystem/Zero/ZeroModel/ZeroCNN.h5')
 #        global file_exist, file1, file2, channelNum
-        eegData_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/eegData.out'
-        stims_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/stims.out'
-        start_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/start.out'
-        result_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/result.out'
+        eegData_txt = 'C:/Users/user/WorldSystem/Zero/CNNtemp/eegData.out'
+        stims_txt = 'C:/Users/user/WorldSystem/Zero/CNNtemp/stims.out'
+        start_txt = 'C:/Users/user/WorldSystem/Zero/CNNtemp/start.out'
+        result_txt = 'C:/Users/user/WorldSystem/Zero/CNNtemp/result.out'
+        
+        ctime = datetime.today().strftime("%m%d_%H%M%S")
+        moveData_eeg = 'C:/Users/user/WorldSystem/Zero/Online/Data/txt_files/eegData/' + ctime + 'eegData.out'
+        moveData_stims = 'C:/Users/user/WorldSystem/Zero/Online/Data/txt_files/stims/' + ctime + 'stims.out'
         
         while True:
             #load text file
@@ -81,8 +87,6 @@ def main():
             while(time.time() - start_time < 35):
                 pass
             if os.path.isfile(result_txt):
-                        os.remove(eegData_txt)
-                        os.remove(stims_txt)
                         os.remove(result_txt)
             while True:
                 if os.path.isfile(eegData_txt) & os.path.isfile(stims_txt):
@@ -90,6 +94,8 @@ def main():
                     os.remove(start_txt)
                     eegData = np.loadtxt(eegData_txt, delimiter = ",")
                     stims = np.loadtxt(stims_txt, delimiter = ",")
+                    shutil.move(eegData_txt, moveData_eeg)
+                    shutil.move(stims_txt, moveData_stims)
                     break
             print("got process")
             ### Preprocessing process
