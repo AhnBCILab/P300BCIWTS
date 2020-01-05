@@ -50,29 +50,71 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
         y = lfilter(b, a, data)
         return y
     
-def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline):
-        Time = stims[np.where(stims[:,1] == code),0][0]
-        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
-        Time_after = np.add(Time,epochOffset).astype(int)
-        Time_base = np.add(Time,baseline).astype(int)
-        Num = Time.shape
-        Epochs = np.zeros((Num[0], nChannel, epochSampleNum))
-        for j in range(Num[0]):
-            Epochs[j, :, :] = eegData[:,Time_after[j]:Time_after[j] + epochSampleNum]
-            for i in range(nChannel):
-                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_after[j]:Time_base[j]]))
-        return [Epochs,Num[0]]
+#def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset, baseline):
+#        Time = stims[np.where(stims[:,1] == code),0][0]
+#        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
+#        Time_offset = np.add(Time,epochOffset).astype(int)
+#        Time_base = np.subtract(Time,baseline).astype(int)
+##        Time_base = np.add(Time,baseline).astype(int)
+#        Num = Time.shape
+#        Epochs = np.zeros((Num[0], nChannel, epochSampleNum))
+#        for j in range(Num[0]):
+#            Epochs[j, :, :] = eegData[:,Time_offset[j]:Time_offset[j] + epochSampleNum]
+#            for i in range(nChannel):
+#                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_base[j]:Time[j]]))
+#        return [Epochs,Num[0]]
+
+#def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset, baseline, epochNum): # [-100 100]
+#        Time = stims[np.where(stims[:,1] == code),0][0]
+#        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
+#        Time_offset = np.add(Time,epochOffset).astype(int)
+#        Time_base = np.subtract(Time,baseline).astype(int)
+##        Time_base = np.add(Time,baseline).astype(int)
+##        Num = Time.shape
+#        Epochs = np.zeros((epochNum, nChannel, epochSampleNum))
+#        for j in range(epochNum):
+#            Epochs[j, :, :] = eegData[:,Time_offset[j]:Time_offset[j] + epochSampleNum]
+#            for i in range(nChannel):
+#                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_base[j]:Time_offset[j]]))
+#        return [Epochs,epochNum]
+
+#def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline): # [0 100]
+#        Time = stims[np.where(stims[:,1] == code),0][0]
+#        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
+#        Time_after = np.add(Time,epochOffset).astype(int)
+#        Time_base = np.add(Time,baseline).astype(int)
+#        Num = Time.shape
+#        Epochs = np.zeros((Num[0], nChannel, epochSampleNum))
+#        for j in range(Num[0]):
+#            Epochs[j, :, :] = eegData[:,Time_after[j]:Time_after[j] + epochSampleNum]
+#            for i in range(nChannel):
+#                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time[j]:Time_base[j]]))
+#        return [Epochs,Num[0]]
     
-def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline, epochNum):
+#def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset, baseline, epochNum):
+#        Time = stims[np.where(stims[:,1] == code),0][0]
+#        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
+#        Time_offset = np.add(Time,epochOffset).astype(int)
+#        Time_base = np.subtract(Time,baseline).astype(int)
+##        Time_base = np.add(Time,baseline).astype(int)
+#        Epochs = np.zeros((epochNum, nChannel, epochSampleNum))
+#        for j in range(epochNum):
+#            Epochs[j, :, :] = eegData[:,Time_offset[j]:Time_offset[j] + epochSampleNum]
+#            for i in range(nChannel):
+#                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_base[j]:Time[j]]))
+#        return [Epochs,epochNum]
+
+def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline, epochNum): # [100 700]
         Time = stims[np.where(stims[:,1] == code),0][0]
         Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
         Time_after = np.add(Time,epochOffset).astype(int)
         Time_base = np.add(Time,baseline).astype(int)
+#        Num = Time.shape
         Epochs = np.zeros((epochNum, nChannel, epochSampleNum))
         for j in range(epochNum):
             Epochs[j, :, :] = eegData[:,Time_after[j]:Time_after[j] + epochSampleNum]
-            for i in range(nChannel):
-                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_after[j]:Time_base[j]]))
+#            for i in range(nChannel):
+#                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_after[j]:Time_base[j]]))
         return [Epochs,epochNum]
 
 def DownsamplingOnlineEpoch(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6, downsampleRate):
@@ -127,9 +169,9 @@ def SWLDAComputeTarget(eegData, stims, samplingFreq, channelNum, SelectedFeature
         eegData = butter_bandpass_filter(eegData, 0.5, 10, samplingFreq, 4)
 
         #Epoching
-        epochSampleNum = int(np.floor(0.4 * samplingFreq))
-        offset = int(np.floor(0.2 * samplingFreq))
-        baseline = int(np.floor(0.6 * samplingFreq))
+        epochSampleNum = int(np.floor(1.0 * samplingFreq))
+        offset = int(np.floor(0.1 * samplingFreq))
+        baseline = int(np.floor(1.1 * samplingFreq))
         [Epochs1, Num1] = EpochingNum(eegData, stims, 1, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
         [Epochs2, Num2] = EpochingNum(eegData, stims, 2, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
         [Epochs3, Num3] = EpochingNum(eegData, stims, 3, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
@@ -192,13 +234,13 @@ def main():
             OnlineTarget_Path = glob.glob(Target_list[i] + '/OnlineTarget/*.txt')
             OnlineData_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/eegData/*.out'), key=os.path.getmtime)
             OnlineStims_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/stims/*.out'), key=os.path.getmtime)
-            SelectedFeatures_Path = glob.glob(Target_list[i] + '/TrainData/SelectedFeatures/*.pickle')
-            Classifier_Path = glob.glob(Target_list[i] + '/TrainData/Classifier/*.pickle')
+            SelectedFeatures_Path = sorted(glob.glob(Target_list[i] + '/TrainData/SelectedFeatures/*.pickle'), key=os.path.getmtime)
+            Classifier_Path = sorted(glob.glob(Target_list[i] + '/TrainData/Classifier/*.pickle'), key=os.path.getmtime)
             
-            with open(SelectedFeatures_Path, 'rb') as f:
+            with open(SelectedFeatures_Path[10], 'rb') as f:
                 SelectedFeatures = pickle.load(f)
             lda = LinearDiscriminantAnalysis(solver='lsqr',shrinkage='auto')
-            lda = joblib.load(Classifier_Path)    
+            lda = joblib.load(Classifier_Path[10])
             
             ##Result txt file read in order to get orders
             OT = []
@@ -211,15 +253,21 @@ def main():
                 for k in range(0, TryO):
                     eegData = np.loadtxt(OnlineData_Path[k], delimiter = ",")
                     stims = np.loadtxt(OnlineStims_Path[k], delimiter = ",")
-                    
-                    if(OT[k][7] == SWLDAComputeTarget(eegData, stims, samplingFreq, channelNum, SelectedFeatures, lda, OT, Trior)):
+                    result = SWLDAComputeTarget(eegData, stims, samplingFreq, channelNum, SelectedFeatures, lda, Trior)
+                    if(OT[k][7] == str(result)):
                         CorrectO = CorrectO + 1
+                    print("Target:",OT[k][7])
+                    print("result:",result)
                 Accuracy[i,l] = CorrectO/TryO
                 if(l == 0):
                     Trior = Trior * 5
                 else:
                     Trior = Trior + 5
             print("Acc:",Accuracy[i,:])
+        print("All patient:")
+        print(Accuracy)
+        print("Acc mean")
+        print(np.mean(Accuracy,axis=0))
         
 if __name__ == "__main__":
     main()

@@ -2,6 +2,8 @@ import numpy as np
 from scipy.signal import butter, lfilter
 import os, glob
 from keras.models import load_model
+import matlab.engine
+import hdf5storage
 
 def Readtxt(directory):
     ##Result txt file read in order to get orders
@@ -93,8 +95,12 @@ def DownsamplingOnlineEpoch(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6
         return [Downsampled1, Downsampled2, Downsampled3, Downsampled4, Downsampled5, Downsampled6, num]
 
 def CNNComputeTarget(eegData, stims, samplingFreq, channelNum, model, Trior):
-        sampleNum = eegData.shape[1]
+#        sampleNum = eegData.shape[1]
         downsampleRate = 4
+        
+        Downsampling(eegData, downsampleRate)
+        samplingFreq = samplingFreq/4
+        sampleNum = eegData.shape[1]
         
         #Common Average Reference
         eegData = Re_referencing(eegData, channelNum, sampleNum)
@@ -103,9 +109,9 @@ def CNNComputeTarget(eegData, stims, samplingFreq, channelNum, model, Trior):
         eegData = butter_bandpass_filter(eegData, 0.5, 10, samplingFreq, 4)
 
         #Epoching
-        epochSampleNum = int(np.floor(0.4 * samplingFreq))
-        offset = int(np.floor(0.3 * samplingFreq))
-        baseline = int(np.floor(0.7 * samplingFreq))
+        epochSampleNum = int(np.floor(1.0 * samplingFreq))
+        offset = int(np.floor(0.1 * samplingFreq))
+        baseline = int(np.floor(1.1 * samplingFreq))
         [Epochs1, Num1] = EpochingNum(eegData, stims, 1, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
         [Epochs2, Num2] = EpochingNum(eegData, stims, 2, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
         [Epochs3, Num3] = EpochingNum(eegData, stims, 3, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
@@ -152,17 +158,18 @@ def main():
         Target_list = sorted(glob.glob(UserData_Path + '/*'), key=os.path.getmtime)
         UserNum = np.shape(Target_list)[0]
         Accuracy = np.zeros((UserNum,5))
-        samplingFreq = 512
+        samplingFreq = 2048
         channelNum = 32
-        model = load_model('C:/Users/user/WorldSystem/Zero/ZeroModel/ZeroCNN.h5')
+        model = load_model('C:/Users/user/WorldSystem/Zero/ZeroModel/ZeroCNN3.h5')
         for i in range(0,UserNum):
             print(str(Target_list[i][35:]))
-            ZeroTarget_Path = []
             ZeroData_Path = []
-            ZeroStims_Path = []
+            ZeroData_Path = sorted(glob.glob(Target_list[i] + '/ZeroData/*.mat'), key=os.path.getmtime)
+            ZeroTarget_Path = []            
+#            ZeroStims_Path = []
             ZeroTarget_Path = glob.glob(Target_list[i] + '/ZeroTarget/*.txt')
-            ZeroData_Path = sorted(glob.glob(Target_list[i] + '/ZeroData/txt_files/eegData/*.out'), key=os.path.getmtime)
-            ZeroStims_Path = sorted(glob.glob(Target_list[i] + '/ZeroData/txt_files/stims/*.out'), key=os.path.getmtime)  
+#            ZeroData_Path = sorted(glob.glob(Target_list[i] + '/ZeroData/txt_files/eegData/*.out'), key=os.path.getmtime)
+#            ZeroStims_Path = sorted(glob.glob(Target_list[i] + '/ZeroData/txt_files/stims/*.out'), key=os.path.getmtime)
             
             ##Result txt file read in order to get orders
             OT = []
@@ -173,8 +180,13 @@ def main():
                 print("Epoch number:",Trior)
                 CorrectO = 0
                 for k in range(0, TryO):
-                    eegData = np.loadtxt(ZeroData_Path[k], delimiter = ",")
-                    stims = np.loadtxt(ZeroStims_Path[k], delimiter = ",")
+                    mat = hdf5storage.loadmat(ZeroData_Path[k])
+                    eegData = mat['eegData']
+                    stims = mat['stims']
+                    eegData = np.transpose(eegData)                    
+                    
+#                    eegData = np.loadtxt(ZeroData_Path[k], delimiter = ",")
+#                    stims = np.loadtxt(ZeroStims_Path[k], delimiter = ",")
                     result = CNNComputeTarget(eegData, stims, samplingFreq, channelNum, model, Trior)
                     if(OT[k][7] == str(result)):
                         CorrectO = CorrectO + 1
@@ -186,7 +198,10 @@ def main():
                 else:
                     Trior = Trior + 5
             print("Acc:",Accuracy[i,:])
-            print("\n")
+        print("All patient:")
+        print(Accuracy)
+        print("Acc mean")
+        np.mean(Accuracy,axis=0)
             
 if __name__ == "__main__":
     main()

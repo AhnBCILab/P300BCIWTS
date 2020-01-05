@@ -228,6 +228,8 @@ def main():
                     Trior = Trior + 5
             print("Acc:",Accuracy[i,:])
             print("\n")
-
+        print("All patient:")
+        print(Accuracy)
+            
 if __name__ == "__main__":
     main()

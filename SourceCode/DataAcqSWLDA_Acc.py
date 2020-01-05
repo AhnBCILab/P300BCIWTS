@@ -1,11 +1,29 @@
 import numpy as np
 from scipy.signal import butter, lfilter
-import time
 import os, glob
-import pickle
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.externals import joblib
-from datetime import datetime
+import matlab.engine
+import hdf5storage
+import pickle
+
+def Readtxt(directory):
+    ##Result txt file read in order to get orders
+    f = open(directory, 'r', encoding='utf-16')
+    j = 0
+    Resultline = []
+    while True:
+        Resultline.append(f.readline())
+        j = j + 1
+        if Resultline[-1] == "\n": 
+            Resultline.pop()
+            j = j - 1
+        if not Resultline[-1]: 
+            Resultline.pop()
+            j = j - 1
+            break
+    f.close()
+    return [j, Resultline]
 
 ### The Methods for Signal Processing ###
 def Downsampling(eegData, downsampleRate):
@@ -32,7 +50,7 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
         b, a = butter_bandpass(lowcut, highcut, fs, order=order)
         y = lfilter(b, a, data)
         return y
-
+    
 def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline):
         Time = stims[np.where(stims[:,1] == code),0][0]
         Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
@@ -45,18 +63,18 @@ def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epoch
             for i in range(nChannel):
                 Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_after[j]:Time_base[j]]))
         return [Epochs,Num[0]]
-
-def DownsamplingEpoch(EpochsT, EpochsN, downsampleRate):
-        num = np.floor(EpochsT.shape[2] / downsampleRate).astype(int)
-        DownsampledT = np.zeros((EpochsT.shape[0],EpochsT.shape[1],num))
-        DownsampledN = np.zeros((EpochsN.shape[0],EpochsN.shape[1],num))
-        for i in range(num):
-            for j in range(EpochsT.shape[1]):
-                for k in range(EpochsT.shape[0]):
-                    DownsampledT[k,j,i] = np.mean(EpochsT[k,j,i*downsampleRate:(i+1)*downsampleRate],dtype=np.float64)
-                for l in range(EpochsN.shape[0]):
-                    DownsampledN[l,j,i] = np.mean(EpochsN[l,j,i*downsampleRate:(i+1)*downsampleRate],dtype=np.float64)
-        return [DownsampledT, DownsampledN, num]
+    
+def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline, epochNum):
+        Time = stims[np.where(stims[:,1] == code),0][0]
+        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
+        Time_after = np.add(Time,epochOffset).astype(int)
+        Time_base = np.add(Time,baseline).astype(int)
+        Epochs = np.zeros((epochNum, nChannel, epochSampleNum))
+        for j in range(epochNum):
+            Epochs[j, :, :] = eegData[:,Time_after[j]:Time_after[j] + epochSampleNum]
+            for i in range(nChannel):
+                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_after[j]:Time_base[j]]))
+        return [Epochs,epochNum]
 
 def DownsamplingOnlineEpoch(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6, downsampleRate):
         num = np.floor(Epochs1.shape[2] / downsampleRate).astype(int)
@@ -77,15 +95,6 @@ def DownsamplingOnlineEpoch(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6
                     Downsampled6[k,j,i] = np.mean(Epochs6[k,j,i*downsampleRate:(i+1)*downsampleRate],dtype=np.float64)
         return [Downsampled1, Downsampled2, Downsampled3, Downsampled4, Downsampled5, Downsampled6, num]
 
-def Convert_to_featureVector(EpochsT, NumT, EpochsN, NumN, featureNum):
-        FeaturesT = np.zeros((NumT, featureNum))
-        for i in range(NumT):
-            FeaturesT[i,:] = np.reshape(EpochsT[i,:,:],(1,featureNum))
-        FeaturesN = np.zeros((NumN, featureNum))
-        for j in range(NumN):
-            FeaturesN[j,:] = np.reshape(EpochsN[j,:,:],(1,featureNum))
-        return [FeaturesT,FeaturesN]
-
 def Online_Convert_to_featureVector(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6, Num, featureNum):
         Features1 = np.zeros((Num, featureNum))
         for i in range(Num):
@@ -105,83 +114,23 @@ def Online_Convert_to_featureVector(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5,
         Features6 = np.zeros((Num, featureNum))
         for i in range(Num):
             Features6[i,:] = np.reshape(Epochs6[i,:,:],(1,featureNum))
-        
+            
         return [Features1,Features2,Features3,Features4,Features5,Features6]
-                            
-def SaveFullTrainingFeatures(eegData, stims, samplingFreq, channelNum, filename):
-        
+    
+def DifISI_SWLDAComputeTarget(eegData, stims, samplingFreq, channelNum, SelectedFeatures, lda, Trior):
         downsampleRate = 4
         
-        eegData = Re_referencing(eegData, channelNum, sampleNum)
-
-        #Bandpass Filter
-        eegData = butter_bandpass_filter(eegData, 0.5, 10, samplingFreq,4)
-    
-        #Epoching
-        epochSampleNum = int(np.floor(0.4 * samplingFreq))
-        offset = int(np.floor(0.2 * samplingFreq))
-        baseline = int(np.floor(0.6 * samplingFreq))
-        [EpochsT, NumT] = Epoching(eegData, stims, 1, samplingFreq, channelNum, epochSampleNum, offset, baseline)
-        [EpochsN, NumN] = Epoching(eegData, stims, 0, samplingFreq, channelNum, epochSampleNum, offset, baseline)
-        #Convert to feature vector
-        featureNum = channelNum*epochSampleNum
-        [FeaturesT, FeaturesN] = Convert_to_featureVector(EpochsT, NumT, EpochsN, NumN, featureNum)
-        TrainData = np.concatenate((FeaturesT, FeaturesN))
-        TrainLabel = np.concatenate((np.ones((NumT,1)).astype(int),np.zeros((NumN,1)).astype(int))).ravel()
-        #Save features
-        with open(filename,'wb') as f:
-            pickle.dump([TrainData, TrainLabel], f) # Saving eeg data
-
-def save_data(eegData, stims, eegData_txt, stims_txt):
-        np.savetxt(eegData_txt, eegData, delimiter = ",")
-        np.savetxt(stims_txt, stims, delimiter = ",")
-
-def start_txt_trigger(start_txt):
-        np.savetxt(start_txt, [1])
-
-def delay(sec):
-        time.sleep(sec)
-
-def load_result(result_txt):
-        if os.path.isfile(result_txt):
-            result = np.loadtxt(result_txt)
-            return result
-        
-def classify(eegData, stims, samplingFreq, channelNum): ### Online Preprocessing code
-        ##Save data as txt files
-        ctime = datetime.today().strftime("%m%d_%H%M%S")
-        eegData_path = 'C:/Users/wldk5/WorldSystem/Within/Online/Data/txt_files/eegData/' + ctime + 'eegData.out'
-        stims_path = 'C:/Users/wldk5/WorldSystem/Within/Online/Data/txt_files/stims/' + ctime + 'stims.out'
-        np.savetxt(eegData_path, eegData, delimiter = ",")
-        np.savetxt(stims_path, stims, delimiter = ",")
-    
-        #Load lda classifier and selected features
-        SelectedF_path = 'C:/Users/wldk5/WorldSystem/Within/StepWise/Features/'
-        Classifier_path = 'C:/Users/wldk5/WorldSystem/Within/StepWise/Classifiers/'
-        
-        current_list = []
-        current_list = sorted(glob.glob(SelectedF_path + '*.pickle'), key=os.path.getmtime, reverse=True)
-        SelectedF_real = current_list[0]
-        with open(SelectedF_real, 'rb') as f:
-            SelectedFeatures = pickle.load(f)
-        
-        current_list2 = []
-        current_list2 = sorted(glob.glob(Classifier_path + '*.pickle'), key=os.path.getmtime, reverse=True)
-        Classifier_real = current_list2[0]
-        lda = LinearDiscriminantAnalysis(solver='lsqr',shrinkage='auto')
-        lda = joblib.load(Classifier_real)
-
-        ##EEG Preprocessing        
+        #Downsampling
+        eegData = Downsampling(eegData, downsampleRate)
+        samplingFreq = samplingFreq/4
         sampleNum = eegData.shape[1]
-        
-        downsampleRate = 4
         
         #Common Average Reference
         eegData = Re_referencing(eegData, channelNum, sampleNum)
 
         #Bandpass Filter
-        eegData = butter_bandpass_filter(eegData, 0.5, 10, samplingFreq,4)
-        
+        eegData = butter_bandpass_filter(eegData, 0.5, 10, samplingFreq, 4)
+
         #Epoching
         epochSampleNum = int(np.floor(0.4 * samplingFreq))
         offset = int(np.floor(0.2 * samplingFreq))
@@ -192,7 +141,7 @@ def classify(eegData, stims, samplingFreq, channelNum): ### Online Preprocessing
         [Epochs4, Num4] = Epoching(eegData, stims, 4, samplingFreq, channelNum, epochSampleNum, offset, baseline)
         [Epochs5, Num5] = Epoching(eegData, stims, 5, samplingFreq, channelNum, epochSampleNum, offset, baseline)
         [Epochs6, Num6] = Epoching(eegData, stims, 6, samplingFreq, channelNum, epochSampleNum, offset, baseline)
-        
+
         #Downsampling Epochs
         [Epochs1,Epochs2,Epochs3,Epochs4,Epochs5,Epochs6,epochSampleNum] = DownsamplingOnlineEpoch(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6, downsampleRate)
         samplingFreq = samplingFreq/4
@@ -200,7 +149,8 @@ def classify(eegData, stims, samplingFreq, channelNum): ### Online Preprocessing
         #Convert a feature vector
         featureNum = channelNum*epochSampleNum
         [Features1, Features2, Features3, Features4, Features5, Features6] = Online_Convert_to_featureVector(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6, Num1, featureNum)        
-        
+
+        print(np.shape(Features1))
         #Classification process
         result = np.zeros((1,6))
         Features1 = Features1[:,SelectedFeatures]
@@ -209,20 +159,104 @@ def classify(eegData, stims, samplingFreq, channelNum): ### Online Preprocessing
         Features4 = Features4[:,SelectedFeatures]
         Features5 = Features5[:,SelectedFeatures]
         Features6 = Features6[:,SelectedFeatures]
+
+        result = np.zeros((6,6))
+        answer = np.zeros((1,6))
         
-        but1_pred = lda.predict(Features1)
-        but2_pred = lda.predict(Features2)
-        but3_pred = lda.predict(Features3)
-        but4_pred = lda.predict(Features4)
-        but5_pred = lda.predict(Features5)
-        but6_pred = lda.predict(Features6)
+        for sessionNum in range(0,6):
+            print("sessionBound:",sessionNum*20,(sessionNum+1)*20)
+            F1 = Features1[sessionNum*20:(sessionNum+1)*20]
+            F2 = Features2[sessionNum*20:(sessionNum+1)*20]
+            F3 = Features3[sessionNum*20:(sessionNum+1)*20]
+            F4 = Features4[sessionNum*20:(sessionNum+1)*20]
+            F5 = Features5[sessionNum*20:(sessionNum+1)*20]
+            F6 = Features6[sessionNum*20:(sessionNum+1)*20]
+            
+            a1 = lda.predict(F1[0:Trior])
+            a2 = lda.predict(F2[0:Trior])
+            a3 = lda.predict(F3[0:Trior])
+            a4 = lda.predict(F4[0:Trior])
+            a5 = lda.predict(F5[0:Trior])
+            a6 = lda.predict(F6[0:Trior])
+            
+            result[sessionNum,0] = np.sum(a1)
+            result[sessionNum,1] = np.sum(a2)
+            result[sessionNum,2] = np.sum(a3)
+            result[sessionNum,3] = np.sum(a4)
+            result[sessionNum,4] = np.sum(a5)
+            result[sessionNum,5] = np.sum(a6)
+            
+            answer[0,sessionNum] = np.argmax(result[sessionNum,:]) + 1
+        print("result",result)
+        print("answer:", answer)
+        RealAnswer = [1.0,2.0,3.0,4.0,5.0,6.0]
+        boolAns = np.equal(RealAnswer,answer)
+        print("boolAns:",boolAns)
+        Accuracy = np.count_nonzero(boolAns) / 6
+        print("Accuracy:",Accuracy)
+        return Accuracy
+
+def main():
+        ###Different ISI SWLDA: Compute accuracy of user data on specific triors
+        UserData_Path = "C:/Users/user/WorldSystem/UserData"
+        Target_list = []
+            #They are stored in the list in the order they are stored.
+        Target_list = sorted(glob.glob(UserData_Path + '/*'), key=os.path.getmtime)
+        UserNum = np.shape(Target_list)[0]
+        Accuracy = np.zeros((UserNum,2,5))
+        for i in range(0,UserNum):
+            print(str(Target_list[i][35:]))
+            current_list = []
+            SelectedFeatures_Path = []
+            Classifier_Path = []
+            current_list = glob.glob(Target_list[i] + '/AcquiredData/*.ov')
+            SelectedFeatures_Path = sorted(glob.glob(Target_list[i] + '/TrainData/SelectedFeatures/*.pickle'), key=os.path.getmtime)
+            Classifier_Path = sorted(glob.glob(Target_list[i] + '/TrainData/Classifier/*.pickle'), key=os.path.getmtime)
+            
+            with open(SelectedFeatures_Path[3], 'rb') as f:
+                SelectedFeatures = pickle.load(f)
+            lda = LinearDiscriminantAnalysis(solver='lsqr',shrinkage='auto')
+            lda = joblib.load(Classifier_Path[3])
+            
+            for t in range(0,2):
+                print("Data num:",t)
+            
+                ovfile_name = current_list[t]
+                matfile_name = current_list[t][:-3] + ".mat"
         
-        result[0,0] = np.sum(but1_pred)
-        result[0,1] = np.sum(but2_pred)
-        result[0,2] = np.sum(but3_pred)
-        result[0,3] = np.sum(but4_pred)
-        result[0,4] = np.sum(but5_pred)
-        result[0,5] = np.sum(but6_pred)
-        
-        answer = np.argmax(result) + 1
-        return answer
+                print("current ov file path:", current_list[t])
+        #         eng = matlab.engine.start_matlab()
+        #         k = eng.convert_ov2mat(ovfile_name, matfile_name)
+                mat = hdf5storage.loadmat(matfile_name)
+                channelNames = mat['channelNames']
+                eegData = mat['eegData']
+                samplingFreq = mat['samplingFreq']
+                samplingFreq = samplingFreq[0,0]
+                stims = mat['stims']
+                channelNum = channelNames.shape
+                channelNum = channelNum[1]
+                eegData = np.transpose(eegData)
+            
+                ##Result txt file read in order to get orders
+                Trior = 1
+                ##Find Session Accuracy
+                for l in range(0, 5):
+                    print("\nEpoch number:",Trior)
+                    Accuracy[i,t,l] = DifISI_SWLDAComputeTarget(eegData, stims, samplingFreq, channelNum, SelectedFeatures, lda, Trior)
+                    if(l == 0):
+                        Trior = Trior * 5
+                    else:
+                        Trior = Trior + 5
+                        
+            print("Acc for no.1:",Accuracy[i,0,:])
+            print("Acc for no.2:",Accuracy[i,1,:])
+            print("\n")
+        print("Finish")
+        for t in range(0, UserNum):
+            print(print(str(Target_list[t][35:])))
+            print(Accuracy[t])
+        print("Acc mean")
+        print(np.mean(Accuracy,axis=0))
+            
+if __name__ == "__main__":
+    main()
