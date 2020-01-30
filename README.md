@@ -19,7 +19,7 @@
 ### Or contact me by email: sanghumwoo@gmail.com
 
 ### Video sources
-<Europe>
+# Europe
 paris
 https://www.youtube.com/watch?v=OFK0vkGsaTU
 
@@ -39,7 +39,7 @@ Firenze
 https://www.youtube.com/watch?v=ycz8PCltH1c
 
 
-<Asia>
+# Asia
 Seoul
 https://www.youtube.com/watch?v=mxbTKd7uUjA
 
@@ -59,7 +59,7 @@ Shanghai
 https://www.youtube.com/watch?v=qafzoWnmDSg
 
 
-<North America>
+# North America
 Vancouver
 https://www.youtube.com/watch?v=4rtcCHfHnpg&list=PLFbrGwG_kJl2mnuWRKg3I5vpvxJFi5Fil&index=10
 
@@ -79,7 +79,7 @@ Alaska
 https://www.youtube.com/watch?v=BKkqmhv1bdA
 
 
-<Oceania>
+# Oceania
 Sydney
 https://www.youtube.com/watch?v=IWMlmf2-RFw
 
@@ -99,7 +99,7 @@ Vanuatu
 https://www.youtube.com/watch?v=gOwSz3rCV8Q
 
 
-<South America>
+# South America
 Barbados
 https://www.youtube.com/watch?v=y2CN5VrnR9g&list=PLFbrGwG_kJl2mnuWRKg3I5vpvxJFi5Fil&index=3
 
@@ -119,7 +119,7 @@ BuenosAires
 https://www.youtube.com/watch?v=nj3FnGV-0L4
 
 
-<Africa>
+# Africa
 Egypt
 https://www.youtube.com/watch?v=4uXLHc67vvk
 
