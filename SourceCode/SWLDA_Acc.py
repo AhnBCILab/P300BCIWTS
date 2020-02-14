@@ -1,28 +1,28 @@
 import numpy as np
-from scipy.signal import butter, lfilter
+from scipy.signal import butter, sosfiltfilt
 import os, glob
 import pickle
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.externals import joblib
 
 def Readtxt(directory):
-    ##Result txt file read in order to get orders
-    f = open(directory, 'r', encoding='utf-16')
-    j = 0
-    Resultline = []
-    while True:
-        Resultline.append(f.readline())
-        j = j + 1
-        if Resultline[-1] == "\n": 
-            Resultline.pop()
-            j = j - 1
-        if not Resultline[-1]: 
-            Resultline.pop()
-            j = j - 1
-            break
-#         print(j)
-    f.close()
-    return [j, Resultline]
+        ##Result txt file read in order to get orders
+        f = open(directory, 'r', encoding='utf-16')
+        j = 0
+        Resultline = []
+        while True:
+            Resultline.append(f.readline())
+            j = j + 1
+            if Resultline[-1] == "\n": 
+                Resultline.pop()
+                j = j - 1
+            if not Resultline[-1]: 
+                Resultline.pop()
+                j = j - 1
+                break
+    #         print(j)
+        f.close()
+        return [j, Resultline]
 
 ### The Methods for Signal Processing ###
 def Downsampling(eegData, downsampleRate):
@@ -43,11 +43,11 @@ def butter_bandpass(lowcut, highcut, fs, order=5):
         nyq = 0.5 * fs
         low = lowcut / nyq
         high = highcut / nyq
-        b, a = butter(order, [low, high], btype='band')
-        return b, a
+        sos = butter(order, [low, high], btype='band', output='sos')
+        return sos
 def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
-        b, a = butter_bandpass(lowcut, highcut, fs, order=order)
-        y = lfilter(b, a, data)
+        sos = butter_bandpass(lowcut, highcut, fs, order=order)
+        y = sosfiltfilt(sos, data)
         return y
     
 #def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset, baseline):
@@ -91,31 +91,31 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
 #                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time[j]:Time_base[j]]))
 #        return [Epochs,Num[0]]
     
-#def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset, baseline, epochNum):
-#        Time = stims[np.where(stims[:,1] == code),0][0]
-#        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
-#        Time_offset = np.add(Time,epochOffset).astype(int)
-#        Time_base = np.subtract(Time,baseline).astype(int)
-##        Time_base = np.add(Time,baseline).astype(int)
-#        Epochs = np.zeros((epochNum, nChannel, epochSampleNum))
-#        for j in range(epochNum):
-#            Epochs[j, :, :] = eegData[:,Time_offset[j]:Time_offset[j] + epochSampleNum]
-#            for i in range(nChannel):
-#                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_base[j]:Time[j]]))
-#        return [Epochs,epochNum]
-
-def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline, epochNum): # [100 700]
+def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset, baseline, epochNum):
         Time = stims[np.where(stims[:,1] == code),0][0]
         Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
-        Time_after = np.add(Time,epochOffset).astype(int)
+        Time_offset = np.add(Time,epochOffset).astype(int)
+#        Time_base = np.subtract(Time,baseline).astype(int)
         Time_base = np.add(Time,baseline).astype(int)
-#        Num = Time.shape
         Epochs = np.zeros((epochNum, nChannel, epochSampleNum))
         for j in range(epochNum):
-            Epochs[j, :, :] = eegData[:,Time_after[j]:Time_after[j] + epochSampleNum]
+            Epochs[j, :, :] = eegData[:,Time_offset[j]:Time_offset[j] + epochSampleNum]
+            for i in range(nChannel):
+                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_offset[j]:Time_base[j]]))
+        return [Epochs,epochNum]
+
+#def EpochingNum(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline, epochNum): # [100 700]
+#        Time = stims[np.where(stims[:,1] == code),0][0]
+#        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
+#        Time_after = np.add(Time,epochOffset).astype(int)
+#        Time_base = np.add(Time,baseline).astype(int)
+##        Num = Time.shape
+#        Epochs = np.zeros((epochNum, nChannel, epochSampleNum))
+#        for j in range(epochNum):
+#            Epochs[j, :, :] = eegData[:,Time_after[j]:Time_after[j] + epochSampleNum]
 #            for i in range(nChannel):
 #                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_after[j]:Time_base[j]]))
-        return [Epochs,epochNum]
+#        return [Epochs,epochNum]
 
 def DownsamplingOnlineEpoch(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5, Epochs6, downsampleRate):
         num = np.floor(Epochs1.shape[2] / downsampleRate).astype(int)
@@ -169,9 +169,9 @@ def SWLDAComputeTarget(eegData, stims, samplingFreq, channelNum, SelectedFeature
         eegData = butter_bandpass_filter(eegData, 0.5, 10, samplingFreq, 4)
 
         #Epoching
-        epochSampleNum = int(np.floor(1.0 * samplingFreq))
-        offset = int(np.floor(0.1 * samplingFreq))
-        baseline = int(np.floor(1.1 * samplingFreq))
+        epochSampleNum = int(np.floor(0.4 * samplingFreq))
+        offset = int(np.floor(0.2 * samplingFreq))
+        baseline = int(np.floor(0.6 * samplingFreq))
         [Epochs1, Num1] = EpochingNum(eegData, stims, 1, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
         [Epochs2, Num2] = EpochingNum(eegData, stims, 2, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
         [Epochs3, Num3] = EpochingNum(eegData, stims, 3, samplingFreq, channelNum, epochSampleNum, offset, baseline, Trior)
@@ -223,6 +223,8 @@ def main():
         UserNum = np.shape(Target_list)[0]
         Accuracy = np.zeros((UserNum,5))
         samplingFreq = 512
+#        extractChannel = ([11,12,13,15,17,18,30,31])
+#        channelNum = np.shape(extractChannel)[0]
         channelNum = 32
         for i in range(0,UserNum):
             print(str(Target_list[i][35:]))
@@ -232,19 +234,19 @@ def main():
             SelectedFeatures_Path = []
             Classifier_Path = []
             OnlineTarget_Path = glob.glob(Target_list[i] + '/OnlineTarget/*.txt')
-            OnlineData_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/eegData/*.out'), key=os.path.getmtime)
-            OnlineStims_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/stims/*.out'), key=os.path.getmtime)
+            OnlineData_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/eegData/Session2/*.out'), key=os.path.getmtime)
+            OnlineStims_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/stims/Session2/*.out'), key=os.path.getmtime)
             SelectedFeatures_Path = sorted(glob.glob(Target_list[i] + '/TrainData/SelectedFeatures/*.pickle'), key=os.path.getmtime)
             Classifier_Path = sorted(glob.glob(Target_list[i] + '/TrainData/Classifier/*.pickle'), key=os.path.getmtime)
             
-            with open(SelectedFeatures_Path[10], 'rb') as f:
+            with open(SelectedFeatures_Path[0], 'rb') as f:
                 SelectedFeatures = pickle.load(f)
             lda = LinearDiscriminantAnalysis(solver='lsqr',shrinkage='auto')
-            lda = joblib.load(Classifier_Path[10])
+            lda = joblib.load(Classifier_Path[0])
             
             ##Result txt file read in order to get orders
             OT = []
-            [TryO, OT] = Readtxt(OnlineTarget_Path[0])
+            [TryO, OT] = Readtxt(OnlineTarget_Path[1])
             Trior = 1
             ##Find Session Accuracy
             for l in range(0, 5):
@@ -253,6 +255,7 @@ def main():
                 for k in range(0, TryO):
                     eegData = np.loadtxt(OnlineData_Path[k], delimiter = ",")
                     stims = np.loadtxt(OnlineStims_Path[k], delimiter = ",")
+#                    eegData = eegData[extractChannel,:]
                     result = SWLDAComputeTarget(eegData, stims, samplingFreq, channelNum, SelectedFeatures, lda, Trior)
                     if(OT[k][7] == str(result)):
                         CorrectO = CorrectO + 1
@@ -265,9 +268,14 @@ def main():
                     Trior = Trior + 5
             print("Acc:",Accuracy[i,:])
         print("All patient:")
-        print(Accuracy)
-        print("Acc mean")
+        for s in range(0, UserNum):
+            print(str(Target_list[s][35:]))
+            print(Accuracy[s,:])
+            print("")
+        print("--------------------------")
+        print("")
+        print("Total Accuracy")
         print(np.mean(Accuracy,axis=0))
-        
+    
 if __name__ == "__main__":
     main()

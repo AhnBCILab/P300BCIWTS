@@ -133,6 +133,11 @@ def SaveFullTrainingFeatures(eegData, stims, samplingFreq, channelNum, filename)
             pickle.dump([TrainData, TrainLabel], f) # Saving eeg data
 
 def save_data(eegData, stims, eegData_txt, stims_txt):
+#        ctime = datetime.today().strftime("%m%d_%H%M%S")
+#        moveData_e = 'C:/Users/user/WorldSystem/UserData/seungyunlee_male_26/OnlineData/txt_files/eegData/'
+#        moveData_s = 'C:/Users/user/WorldSystem/UserData/seungyunlee_male_26/OnlineData/txt_files/stims/'
+#        moveData_e = moveData_e + ctime + 'eegData.out'
+#        moveData_s = moveData_s + ctime + 'stims.out'
         np.savetxt(eegData_txt, eegData, delimiter = ",")
         np.savetxt(stims_txt, stims, delimiter = ",")
 
@@ -143,9 +148,12 @@ def delay(sec):
         time.sleep(sec)
 
 def load_result(result_txt):
-        if os.path.isfile(result_txt):
-            result = np.loadtxt(result_txt)
-            return result
+        while(True):
+            if os.path.isfile(result_txt):
+                result = np.loadtxt(result_txt)
+                os.remove(result_txt)
+                break;
+        return result
         
 def classify(eegData, stims, samplingFreq, channelNum): ### Online Preprocessing code
         ##Save data as txt files
@@ -183,8 +191,8 @@ def classify(eegData, stims, samplingFreq, channelNum): ### Online Preprocessing
         eegData = butter_bandpass_filter(eegData, 0.5, 10, samplingFreq,4)
         
         #Epoching
-        epochSampleNum = int(np.floor(0.4 * samplingFreq))
-        offset = int(np.floor(0.2 * samplingFreq))
+        epochSampleNum = int(np.floor(0.6 * samplingFreq))
+        offset = int(np.floor(0. * samplingFreq))
         baseline = int(np.floor(0.6 * samplingFreq))
         [Epochs1, Num1] = Epoching(eegData, stims, 1, samplingFreq, channelNum, epochSampleNum, offset, baseline)
         [Epochs2, Num2] = Epoching(eegData, stims, 2, samplingFreq, channelNum, epochSampleNum, offset, baseline)

@@ -152,8 +152,8 @@ def main():
 #                    shutil.move(ZeroTxt_eeg[i], CurrentFolder + '/ZeroData/txt_files/eegData/' + ZeroTxt_eeg[i][63:])
 #                    shutil.move(ZeroTxt_stims[i], CurrentFolder + '/ZeroData/txt_files/stims/' + ZeroTxt_stims[i][61:])
         
-        ov_Path = "C:/Users/user/Desktop/6_SWLDAOnline-[2019.12.05-20.00.48].ov"
-        matfile_name = "C:/Users/user/Desktop/6_SWLDAOnline-[2019.12.05-20.00.48].mat"
+        ov_Path = "C:/Users/user/Desktop/Experiment_Af_October/Userdata/woosanghum/OnlineData/1_SWLDAOnline-[2019.12.04-16.40.29].ov"
+        matfile_name = "C:/Users/user/Desktop/Experiment_Af_October/Userdata/woosanghum/OnlineData/1_SWLDAOnline-[2019.12.04-16.40.29].mat"
         
         print("current ov file path:", ov_Path)
         eng = matlab.engine.start_matlab()

@@ -7,14 +7,14 @@ FC5
 T7
 C3
 CP1
-CP5
+10. CP5
 P7
 P3
 Pz
 PO3
 O1
 Oz
-O2
+17. O2
 PO4
 P4
 P8
