@@ -16,7 +16,7 @@ public class SouthAmericaBlink : MonoBehaviour
     public string path = "";
 
     public StimulusSender theSender = null;
-    public StimulusSender theListener = null;
+
     ColorBlock cb;
     public Button Barbados; //image to toggle
     public Button BuenosAires; //image to toggle
@@ -45,8 +45,7 @@ public class SouthAmericaBlink : MonoBehaviour
     public byte buttonIndexNum = 0;
     int rndnum = 0;
     public int[] ranArr = { 0, 1, 2, 3, 4, 5 };
-
-    public string outp = "";
+    
     public string output = "";
 
     bool blinkstate = true;
@@ -82,8 +81,7 @@ public class SouthAmericaBlink : MonoBehaviour
 
         theSender = new StimulusSender();
         theSender.open("localhost", 12140);
-        theListener = new StimulusSender();
-        theListener.open("localhost", 12240);
+
         cb.normalColor = Color.gray;
         cb.colorMultiplier = 1.5f;
         Barbados.colors = cb;
@@ -95,6 +93,10 @@ public class SouthAmericaBlink : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene("Menu");
+        }
         current_time += Time.deltaTime;
         //Restart blinking
         if (current_time > 5.0f && blinkstate == true)
@@ -252,34 +254,32 @@ public class SouthAmericaBlink : MonoBehaviour
         {
             System.Threading.Thread.Sleep(1000);
             theSender.send(finish);
-            output = theListener.receive();
-            outp = output.Substring(0, 28);
+            output = InputName.theListener.receive();
             theSender.send(start);
             theSender.close();
-            theListener.close();
             System.Threading.Thread.Sleep(1000);
             FileStream f = new FileStream(Application.dataPath + "/StreamingAssets/" + InputName.patient_id + ".txt", FileMode.Append, FileAccess.Write);
             StreamWriter writer = new StreamWriter(f, System.Text.Encoding.Unicode);
-            writer.WriteLine("Order: " + random + " / Result: " + outp[27] + "\n");
+            writer.WriteLine("Order: " + random + " / Result: " + output + "\n");
             writer.Close();
-            switch (outp)
+            switch (output)
             {
-                case "OVTK_StimulationId_Number_01":
+                case "1":
                     SceneManager.LoadScene("Barbados");
                     break;
-                case "OVTK_StimulationId_Number_02":
+                case "2":
                     SceneManager.LoadScene("EasterIsland");
                     break;
-                case "OVTK_StimulationId_Number_03":
+                case "3":
                     SceneManager.LoadScene("Cusco");
                     break;
-                case "OVTK_StimulationId_Number_04":
+                case "4":
                     SceneManager.LoadScene("BuenosAires");
                     break;
-                case "OVTK_StimulationId_Number_05":
+                case "5":
                     SceneManager.LoadScene("Patagonia");
                     break;
-                case "OVTK_StimulationId_Number_06":
+                case "6":
                     SceneManager.LoadScene("RiodeJaneiro");
                     break;
                 default:

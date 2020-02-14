@@ -24,7 +24,7 @@ public class StimulusSender
     //public const int SIZE_FLOAT = 4;
     //public const int SIZE_DOUBLE = 8;
     //public const int SIZE_BOOL = 1;
-
+    
     private int m_iPos = 8;
     private int m_iMax = 24;
     byte[] m_Buf = new byte[24];
@@ -47,7 +47,6 @@ public class StimulusSender
         Array.Clear(m_Buf, 0x0, 24);
         return true;
     }
-
     // Close connection
     //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in C#:
     //ORIGINAL LINE: public boolean close() throws Exception
@@ -85,7 +84,6 @@ public class StimulusSender
 
         return responseData;
     }
-
     public void allocate(int iLimit)
     {
         m_iPos = 0;

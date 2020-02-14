@@ -13,11 +13,14 @@ public class InputName : MonoBehaviour
     public GameObject Play;
     public GameObject Training;
     public GameObject DataAcquire;
+    public GameObject Resting;
     public GameObject Quit;
     public GameObject FitstScene;
 
+    public static StimulusSender theListener = null;
     public static string patient_id = "";
     public static string Real_id = "";
+    public static int Try = 0;
     public static int number = 1;
     private static InputName s_Instance = null;
     // Start is called before the first frame update
@@ -63,6 +66,7 @@ public class InputName : MonoBehaviour
             Play.SetActive(true);
             Training.SetActive(true);
             DataAcquire.SetActive(true);
+            Resting.SetActive(true);
             Quit.SetActive(true);
         }
     }
@@ -87,6 +91,7 @@ public class InputName : MonoBehaviour
         Play.SetActive(true);
         Training.SetActive(true);
         DataAcquire.SetActive(true);
+        Resting.SetActive(true);
         Quit.SetActive(true);
     }
 }

@@ -16,9 +16,9 @@ public class AcquiringBlink : MonoBehaviour
     public Button Button0; //image to toggle
     public Button Button1; //image to toggle
     public Button Button2; //image to toggle
-    public Button Button3; //image to toggle  
-    public Button Button4; //image to toggle 
-    public Button Button5; //image to toggle 
+    public Button Button3; //image to toggle 
+    public Button Button4; //image to toggle
+    public Button Button5; //image to toggle
 
     public int num_of_blink_arrow = 2;
     public float current_time = 0.0f;
@@ -195,7 +195,6 @@ public class AcquiringBlink : MonoBehaviour
                     isBlinking = true;
                     InvokeRepeating("ToggleState", startDelay, interval);
                 }
-
             }
             else if (rndnum == 3 && but3 == false)
             {
@@ -222,7 +221,6 @@ public class AcquiringBlink : MonoBehaviour
                     isBlinking = true;
                     InvokeRepeating("ToggleState", startDelay, interval);
                 }
-
             }
             else if (rndnum == 4 && but4 == false)
             {
@@ -249,7 +247,6 @@ public class AcquiringBlink : MonoBehaviour
                     isBlinking = true;
                     InvokeRepeating("ToggleState", startDelay, interval);
                 }
-
             }
             else if (rndnum == 5 && but5 == false)
             {

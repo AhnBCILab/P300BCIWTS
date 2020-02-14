@@ -8,6 +8,9 @@ using UnityEngine;
 using UnityEngine.Experimental;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading;
+using System.Net;
+using System.Net.Sockets;
 
 public class Blink : MonoBehaviour
 {
@@ -16,7 +19,7 @@ public class Blink : MonoBehaviour
     public string path = "";
 
     public StimulusSender theSender = null;
-    public StimulusSender theListener = null;
+
     ColorBlock cb;
     public Button NorthAmerica; //image to toggle
     public Button SouthAmerica; //image to toggle
@@ -46,7 +49,6 @@ public class Blink : MonoBehaviour
     public byte start = 8;
 
     public int[] ranArr = { 0, 1, 2, 3, 4, 5 };
-    public string outp = "";
     public string output = "";
     //string ipUIVAServer = "localhost";
     //public UIVA_Client theClient = null;
@@ -58,6 +60,13 @@ public class Blink : MonoBehaviour
 
     void Start()
     {
+        if (InputName.Try == 6)
+        {
+            InputName.Try = 0;
+            SceneManager.LoadScene("Menu");
+            InputName.theListener.close();
+        }
+
         random = UnityEngine.Random.Range(1, 7);
         switch (random)
         {
@@ -86,10 +95,12 @@ public class Blink : MonoBehaviour
         
         theSender = new StimulusSender();
         theSender.open("localhost", 12140);
-        theListener = new StimulusSender();
-        theListener.open("localhost", 12240);
-        //theClient = new UIVA_Client(ipUIVAServer);
-        //theClient.Press_O(start);
+        if (InputName.Try == 0)
+        {
+            InputName.theListener = new StimulusSender();
+            InputName.theListener.open("localhost", 12240);
+        }
+
         cb.normalColor = Color.gray;
         cb.colorMultiplier = 1.5f;
         NorthAmerica.colors = cb;
@@ -267,36 +278,35 @@ public class Blink : MonoBehaviour
         }
         else
         {
+            InputName.Try = InputName.Try + 1;
             System.Threading.Thread.Sleep(1000);
             theSender.send(finish);
-            output = theListener.receive();
-            outp = output.Substring(0, 28);
+            output = InputName.theListener.receive();
             theSender.send(start);
             theSender.close();
-            theListener.close();
             System.Threading.Thread.Sleep(1000);
             FileStream f = new FileStream(Application.dataPath + "/StreamingAssets/" + InputName.patient_id + ".txt", FileMode.Append, FileAccess.Write);
             StreamWriter writer = new StreamWriter(f, System.Text.Encoding.Unicode);
-            writer.WriteLine("Order: " + random + " / Result: " + outp[27]);
+            writer.WriteLine("Order: " + random + " / Result: " + output);
             writer.Close();
-            switch (outp)
+            switch (output)
             {
-                case "OVTK_StimulationId_Number_01":
+                case "1":
                     SceneManager.LoadScene("NorthAmerica");
                     break;
-                case "OVTK_StimulationId_Number_02":
+                case "2":
                     SceneManager.LoadScene("Europe");
                     break;
-                case "OVTK_StimulationId_Number_03":
+                case "3":
                     SceneManager.LoadScene("Asia");
                     break;
-                case "OVTK_StimulationId_Number_04":
+                case "4":
                     SceneManager.LoadScene("SouthAmerica");
                     break;
-                case "OVTK_StimulationId_Number_05":
+                case "5":
                     SceneManager.LoadScene("Africa");
                     break;
-                case "OVTK_StimulationId_Number_06":
+                case "6":
                     SceneManager.LoadScene("Oceania");
                     break;
                 default:
