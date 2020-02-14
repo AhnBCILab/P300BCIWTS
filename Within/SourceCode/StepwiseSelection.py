@@ -3,19 +3,21 @@ import pickle
 import pandas as pd
 import statsmodels.api as sm
 import hdf5storage
-from scipy.signal import butter, lfilter
+from scipy.signal import butter, lfilter, sosfiltfilt
 import os, glob, time
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 import matlab.engine
 from datetime import datetime
 from sklearn.externals import joblib
 
+
 def stepwise_selection(X, y, 
                        initial_list=[], 
                        threshold_in=0.01, 
                        threshold_out = 0.05, 
                        verbose=True):
-    """ Perform a forward-backward feature selection 
+    """ The original author of stepwise_selection is: https://datascience.stackexchange.com/users/24162/david-dale
+    It perform a forward-backward feature selection 
     based on p-value from statsmodels.api.OLS
     Arguments:
         X - pandas.DataFrame with candidate features
@@ -78,14 +80,14 @@ def butter_bandpass(lowcut, highcut, fs, order=5):
         nyq = 0.5 * fs
         low = lowcut / nyq
         high = highcut / nyq
-        b, a = butter(order, [low, high], btype='band')
-        return b, a
+        sos = butter(order, [low, high], btype='band', output='sos')
+        return sos
 def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
-        b, a = butter_bandpass(lowcut, highcut, fs, order=order)
-        y = lfilter(b, a, data)
+        sos = butter_bandpass(lowcut, highcut, fs, order=order)
+        y = sosfiltfilt(sos, data)
         return y
 
-def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset, baseline):
+def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset,baseline):
         Time = stims[np.where(stims[:,1] == code),0][0]
         Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
         Time_after = np.add(Time,epochOffset).astype(int)
@@ -97,6 +99,20 @@ def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epoch
             for i in range(nChannel):
                 Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_after[j]:Time_base[j]]))
         return [Epochs,Num[0]]
+
+#def Epoching(eegData, stims, code, samplingRate, nChannel, epochSampleNum, epochOffset, baseline):
+#        Time = stims[np.where(stims[:,1] == code),0][0]
+#        Time = np.floor(np.multiply(Time,samplingRate)).astype(int)
+#        Time_offset = np.add(Time,epochOffset).astype(int)
+#        Time_base = np.subtract(Time,baseline).astype(int)
+##        Time_base = np.add(Time,baseline).astype(int)
+#        Num = Time.shape
+#        Epochs = np.zeros((Num[0], nChannel, epochSampleNum))
+#        for j in range(Num[0]):
+#            Epochs[j, :, :] = eegData[:,Time_offset[j]:Time_offset[j] + epochSampleNum]
+#            for i in range(nChannel):
+#                Epochs[j, i, :] = np.subtract(Epochs[j, i, :], np.mean(eegData[i,Time_base[j]:Time[j]]))
+#        return [Epochs,Num[0]]
 
 def DownsamplingEpoch(EpochsT, EpochsN, downsampleRate):
         num = np.floor(EpochsT.shape[2] / downsampleRate).astype(int)
@@ -190,10 +206,11 @@ def main():
         #Saving LDA classifier and Selected features
         lda = LinearDiscriminantAnalysis(solver='lsqr',shrinkage='auto')
         lda.fit(SWTrainData, TrainLabel)
-        joblib.dump(lda, Classifier_path, protocol=2)
+        joblib.dump(lda, Classifier_path)
         with open(SelectedF_path, 'wb') as f:
-            pickle.dump(SelectedFeatures, f, protocol=2)
+            pickle.dump(SelectedFeatures, f)
         #print(SelectedFeatures)
         print("time :", time.time() - start)
+        
 if __name__ == "__main__":
     main()
