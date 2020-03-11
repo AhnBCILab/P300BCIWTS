@@ -1,6 +1,7 @@
 **World Tour System(WTS)**
 ==========================
 [![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/kmGgAUAVbds)  
+https://img.youtube.com/vi/kmGgAUAVbds/maxresdefault.jpg
 
 **System Overview**
 -------------------
