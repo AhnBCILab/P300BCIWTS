@@ -2,7 +2,8 @@
 ==========================
 [![Watch the video](https://img.youtube.com/vi/kmGgAUAVbds/maxresdefault.jpg)](https://youtu.be/kmGgAUAVbds)  
 
-kmGgAUAVbds&feature=youtu.be
+{% include WTS.html id="kmGgAUAVbds" %}
+
 **System Overview**
 -------------------
 ### World Tour System (WTS) is a world tour BCI application using P300 brain waves.
