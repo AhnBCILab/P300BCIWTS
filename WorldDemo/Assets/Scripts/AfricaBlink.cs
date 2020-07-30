@@ -82,7 +82,8 @@ public class AfricaBlink : MonoBehaviour
         theSender = new StimulusSender();
         theSender.open("localhost", 12140);
 
-        cb.normalColor = Color.gray;
+        cb.normalColor = new Color(132f, 132f, 132f, 255f);
+        //cb.normalColor = Color.gray;
         cb.colorMultiplier = 1.5f;
         Capetown.colors = cb;
         Johannesburg.colors = cb;

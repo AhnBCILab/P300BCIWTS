@@ -101,7 +101,8 @@ public class Blink : MonoBehaviour
             InputName.theListener.open("localhost", 12240);
         }
 
-        cb.normalColor = Color.gray;
+        cb.normalColor = new Color(132f, 132f, 132f, 255f);
+        //cb.normalColor = Color.gray;
         cb.colorMultiplier = 1.5f;
         NorthAmerica.colors = cb;
         SouthAmerica.colors = cb;

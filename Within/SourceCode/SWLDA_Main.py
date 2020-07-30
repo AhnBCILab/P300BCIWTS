@@ -91,11 +91,11 @@ def Online_Convert_to_featureVector(Epochs1, Epochs2, Epochs3, Epochs4, Epochs5,
 
 def main():
 #        global file_exist, file1, file2, channelNum
-        eegData_txt = 'C:/Users/wldk5/WorldSystem/Within/Onlinetemp/eegData.out'
-        stims_txt = 'C:/Users/wldk5/WorldSystem/Within/Onlinetemp/stims.out'
-        start_txt = 'C:/Users/wldk5/WorldSystem/Within/Onlinetemp/start.out'
-        moveData_eeg = 'C:/Users/wldk5/WorldSystem/Within/Online/Data/txt_files/eegData/'
-        moveData_stims = 'C:/Users/wldk5/WorldSystem/Within/Online/Data/txt_files/stims/'
+        eegData_txt = 'WorldSystem/Within/Onlinetemp/eegData.out'
+        stims_txt = 'WorldSystem/Within/Onlinetemp/stims.out'
+        start_txt = 'WorldSystem/Within/Onlinetemp/start.out'
+        moveData_eeg = 'WorldSystem/Within/Online/Data/txt_files/eegData/'
+        moveData_stims = 'WorldSystem/Within/Online/Data/txt_files/stims/'
         
         channelNum = 32
         downsampleRate = 4
@@ -104,11 +104,11 @@ def main():
         serverSock.bind(('', 12240))
         serverSock.listen(0)
         connectionSock, addr = serverSock.accept()
-        print(str(addr),'에서 접속이 확인되었습니다.')
+        print('The connection has been confirmed at',str(addr))
         
         #Load lda classifier and selected features
-        SelectedF_path = 'C:/Users/wldk5/WorldSystem/Within/StepWise/Features/'
-        Classifier_path = 'C:/Users/wldk5/WorldSystem/Within/StepWise/Classifiers/'
+        SelectedF_path = 'WorldSystem/Within/StepWise/Features/'
+        Classifier_path = 'WorldSystem/Within/StepWise/Classifiers/'
         
         current_list = []
         current_list = sorted(glob.glob(SelectedF_path + '*.pickle'), key=os.path.getmtime, reverse=True)

@@ -29,23 +29,23 @@ def Readtxt(directory):
     return [j, Resultline]
 
 def main():
-        start_txt = 'C:/Users/wldk5/WorldSystem/Zero/CNNtemp/start.out'
+        start_txt = 'WorldSystem/Zero/CNNtemp/start.out'
         if os.path.isfile(start_txt):
             os.remove(start_txt)
     
         ##Generate User folder
-        RootPath = "C:/Users/wldk5/WorldSystem/UserData/"
-        RestingState_Path = "C:/Users/wldk5/WorldSystem/RestingState/"
-        TrainingData_Path = "C:/Users/wldk5/WorldSystem/Within/Training/Data/"
-        OnlineResult_Path = "C:/Users/wldk5/WorldSystem/WorldDemo/World_125/WorldTravelSystem_Data/StreamingAssets/"
-        OnlineData_Path = "C:/Users/wldk5/WorldSystem/Within/Online/Data/"
-        OnlineTxt_Path = "C:/Users/wldk5/WorldSystem/Within/Online/Data/txt_files/"
-        Stepwise_Path = "C:/Users/wldk5/WorldSystem/Within/StepWise/"
-        ZeroData_Path = "C:/Users/wldk5/WorldSystem/Zero/Online/Data/"
-        ZeroTxt_Path = "C:/Users/wldk5/WorldSystem/Zero/Online/Data/txt_files/"
-        DataAcquisition_Path = "C:/Users/wldk5/WorldSystem/DataAcquisition/Data/"
-        PreSurvey_Path = "C:/Users/wldk5/WorldSystem/Survey_Program/Build/Survey_Program_Data/StreamingAssets/"
-        PostSurvey_Path = "C:/Users/wldk5/WorldSystem/Post_Survey/Build/Post_Survey_Data/StreamingAssets/"
+        RootPath = "WorldSystem/UserData/"
+        RestingState_Path = "WorldSystem/RestingState/"
+        TrainingData_Path = "WorldSystem/Within/Training/Data/"
+        OnlineResult_Path = "WorldSystem/WorldDemo/World_125/WorldTravelSystem_Data/StreamingAssets/"
+        OnlineData_Path = "WorldSystem/Within/Online/Data/"
+        OnlineTxt_Path = "WorldSystem/Within/Online/Data/txt_files/"
+        Stepwise_Path = "WorldSystem/Within/StepWise/"
+        ZeroData_Path = "WorldSystem/Zero/Online/Data/"
+        ZeroTxt_Path = "WorldSystem/Zero/Online/Data/txt_files/"
+        DataAcquisition_Path = "WorldSystem/DataAcquisition/Data/"
+        PreSurvey_Path = "WorldSystem/Survey_Program/Build/Survey_Program_Data/StreamingAssets/"
+        PostSurvey_Path = "WorldSystem/Post_Survey/Build/Post_Survey_Data/StreamingAssets/"
         Result_list = []
             #They are stored in the list in the order they are stored.
         Result_list = sorted(glob.glob(OnlineResult_Path + '*.txt'), key=os.path.getmtime)

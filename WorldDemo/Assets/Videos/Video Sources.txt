@@ -6,11 +6,7 @@ Unity 맵 도시 선정(6x6 36개 도시)
 북아메리카 : 뉴욕, 벤쿠버, 라스베이거스, 로스앤젤레스, 시카고, 알래스카
 남아메리카 : 바베이도스, 이스터섬(칠레), 페루(쿠스코), 파타고니아, 리우데자네이루, 부에노스아이레스
 
-출처:
-Destination Tips
-
-The World Minute Project
-
+Video clips whose time range was not specified were used from the beginning to 10 seconds.
 
 <Europe>
 paris
@@ -80,7 +76,7 @@ Melbourne
 https://www.youtube.com/watch?v=KnTicgTnF4M
 
 Fiji
-https://www.youtube.com/watch?v=g1QCUeu4z5I
+https://www.youtube.com/watch?v=JRaakIL-N_s
 
 NewZealand
 https://www.youtube.com/watch?v=fHCemviY06Y
@@ -122,10 +118,10 @@ https://www.youtube.com/watch?v=Rfw9YZzf2ak
 Johannesburg
 https://www.youtube.com/watch?v=2qTsWpB939Y
 
-Nairobi
+Nairobi (0:14 ~ 0:24)
 https://www.youtube.com/watch?v=4sl3hko3tJU
 
-Pretoria East
+Pretoria East (0:05 ~ 0:15)
 https://www.youtube.com/watch?v=tNGpklQ_97Y
 
 Ethiopia

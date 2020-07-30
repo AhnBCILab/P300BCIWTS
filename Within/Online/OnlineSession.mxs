@@ -1,7 +1,7 @@
 <OpenViBE-Scenario>
-	<FormatVersion>1</FormatVersion>
+	<FormatVersion>2</FormatVersion>
 	<Creator>OpenViBE Designer</Creator>
-	<CreatorVersion>2.1.0</CreatorVersion>
+	<CreatorVersion>2.2.0</CreatorVersion>
 	<Settings></Settings>
 	<Inputs></Inputs>
 	<Outputs></Outputs>
@@ -90,7 +90,7 @@
 					<TypeIdentifier>(0x330306dd, 0x74a95f98)</TypeIdentifier>
 					<Name>Filename</Name>
 					<DefaultValue>record-[$core{date}-$core{time}].ov</DefaultValue>
-					<Value>C:/Users/wldk5/WorldSystem/Within/Online/Data/SWLDAOnline-[$core{date}-$core{time}].ov</Value>
+					<Value>WorldSystem/Within/Online/Data/SWLDAOnline-[$core{date}-$core{time}].ov</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 				<Setting>
@@ -269,7 +269,7 @@
 				</Input>
 				<Input>
 					<TypeIdentifier>(0x6f752dd0, 0x082a321e)</TypeIdentifier>
-					<Name>New input</Name>
+					<Name>New input(1)</Name>
 				</Input>
 			</Inputs>
 			<Settings>
@@ -284,7 +284,7 @@
 					<TypeIdentifier>(0xb0d0db45, 0x49cbc34a)</TypeIdentifier>
 					<Name>Script</Name>
 					<DefaultValue></DefaultValue>
-					<Value>C:/Users/wldk5/WorldSystem/Within/SourceCode/WorldOnline.py</Value>
+					<Value>WorldSystem/Within/SourceCode/WorldOnline.py</Value>
 					<Modifiability>false</Modifiability>
 				</Setting>
 			</Settings>

@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("C:/Users/wldk5/WorldSystem/SourceCode")
+sys.path.append("WorldSystem/SourceCode")
 import ProcessingWorld
 
 class MyOVBox(OVBox):
@@ -14,10 +14,10 @@ class MyOVBox(OVBox):
             eegData = np.zeros((32,1))
             stims = np.zeros((1,3))
             trigger = 0.
-            eegData_txt = 'C:/Users/wldk5/WorldSystem/Within/Onlinetemp/eegData.out'
-            stims_txt = 'C:/Users/wldk5/WorldSystem/Within/Onlinetemp/stims.out'
-            start_txt = 'C:/Users/wldk5/WorldSystem/Within/Onlinetemp/start.out'
-            result_txt = 'C:/Users/wldk5/WorldSystem/Within/Onlinetemp/result.out'
+            eegData_txt = 'WorldSystem/Within/Onlinetemp/eegData.out'
+            stims_txt = 'WorldSystem/Within/Onlinetemp/stims.out'
+            start_txt = 'WorldSystem/Within/Onlinetemp/start.out'
+            result_txt = 'WorldSystem/Within/Onlinetemp/result.out'
             ProcessingWorld.start_txt_trigger(start_txt)
 
 	def process(self):

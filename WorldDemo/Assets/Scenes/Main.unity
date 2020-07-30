@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -967,7 +967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1722,7 +1722,6 @@ MonoBehaviour:
   finish: 7
   start: 8
   ranArr: 000000000100000002000000030000000400000005000000
-  outp: 
   output: 
 --- !u!114 &2067859720
 MonoBehaviour:
@@ -1835,7 +1834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
+  m_Color: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

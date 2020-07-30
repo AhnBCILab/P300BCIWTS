@@ -35,6 +35,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.RawImage
     - UnityEngine.UI.Text
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Scenes/AcquiringData.unity:
@@ -2694,4 +2695,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/EasterIsland.unity
   - Assets/Scenes/Patagonia.unity
   - Assets/Scenes/RiodeJaneiro.unity
-  playerPath: C:/Users/wldk5/WorldSystem/WorldDemo/World_125/WorldTravelSystem.exe
+  playerPath: C:/Users/user/WorldSystem/WorldDemo/Experiment/WorldTravelSystem.exe

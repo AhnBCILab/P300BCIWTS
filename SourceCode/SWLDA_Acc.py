@@ -226,7 +226,7 @@ def main():
 #        extractChannel = ([11,12,13,15,17,18,30,31])
 #        channelNum = np.shape(extractChannel)[0]
         channelNum = 32
-        for i in range(0,UserNum):
+        for i in range(0,1):
             print(str(Target_list[i][35:]))
             OnlineTarget_Path = []
             OnlineData_Path = []
@@ -234,8 +234,8 @@ def main():
             SelectedFeatures_Path = []
             Classifier_Path = []
             OnlineTarget_Path = glob.glob(Target_list[i] + '/OnlineTarget/*.txt')
-            OnlineData_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/eegData/Session2/*.out'), key=os.path.getmtime)
-            OnlineStims_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/stims/Session2/*.out'), key=os.path.getmtime)
+            OnlineData_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/eegData/Session1/*.out'), key=os.path.getmtime)
+            OnlineStims_Path = sorted(glob.glob(Target_list[i] + '/OnlineData/txt_files/stims/Session1/*.out'), key=os.path.getmtime)
             SelectedFeatures_Path = sorted(glob.glob(Target_list[i] + '/TrainData/SelectedFeatures/*.pickle'), key=os.path.getmtime)
             Classifier_Path = sorted(glob.glob(Target_list[i] + '/TrainData/Classifier/*.pickle'), key=os.path.getmtime)
             
@@ -246,7 +246,7 @@ def main():
             
             ##Result txt file read in order to get orders
             OT = []
-            [TryO, OT] = Readtxt(OnlineTarget_Path[1])
+            [TryO, OT] = Readtxt(OnlineTarget_Path[0])
             Trior = 1
             ##Find Session Accuracy
             for l in range(0, 5):
