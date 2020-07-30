@@ -13,12 +13,17 @@
 
 ### The following figure is the system diagram of WTS.
 ![WTS_SystemDiagram](./Image/WTS_SystemDiagram.png)
+### ※ Update ※
+OpenViBE's Python Scripting box does not yet support Python 3. In a situation where the CNN model needs to be introduced in WTS, the system is divided into three modules to operate in order to use tensorflow in Python 3. The method of operating the new method of WTS was described in detail in step-by-step in the Documentation.
+
+* If you want to use the old WTS, you can implement the function in SourceCode/ProcessingWorld.py and call the function in the second for statement in the def process part of Within/SourceCode/WorldOnline.py. Details are described in Documentation.
+
 
 ### WTS system proceeds as follows.
 ![WTS_Flowchart](./Image/WTS_Flowchart.jpg)
 
 ### See the WTS_Documentation.pdf file for details.
-### Or contact me by email: sanghumwoo@gmail.com
+### Or contact BCI LAB: https://bcilab.handong.edu/contact
 
 ### Video sources
 #### Europe
@@ -89,7 +94,7 @@ Melbourne
 https://www.youtube.com/watch?v=KnTicgTnF4M
 
 Fiji
-https://www.youtube.com/watch?v=g1QCUeu4z5I
+https://www.youtube.com/watch?v=JRaakIL-N_s
 
 NewZealand
 https://www.youtube.com/watch?v=fHCemviY06Y
@@ -131,11 +136,12 @@ https://www.youtube.com/watch?v=Rfw9YZzf2ak
 Johannesburg
 https://www.youtube.com/watch?v=2qTsWpB939Y
 
-Nairobi
+Nairobi (0:14 ~ 0:24)
 https://www.youtube.com/watch?v=4sl3hko3tJU
 
-Pretoria East
+Pretoria East (0:05 ~ 0:15)
 https://www.youtube.com/watch?v=tNGpklQ_97Y
 
 Ethiopia
 https://www.youtube.com/watch?v=2WAwquxIi4c
+
