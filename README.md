@@ -14,7 +14,7 @@
 ### The following figure is the system diagram of WTS.
 ![WTS_SystemDiagram](./Image/WTS_SystemDiagram.png)
 ### ※ Update ※
-#### For using New WTS: Read "How to experiment by using (New)WTS.pdf"
+#### For using New WTS: Read "How_To_Experiment_by_using_New_WTS.pdf"
 #### Naive user and for using Old WTS: Read "WTS_Documentation.pdf"
 OpenViBE's Python Scripting box does not yet support Python 3. In a situation where the CNN model needs to be introduced in WTS, the system is divided into three modules to operate in order to use tensorflow in Python 3. The method of operating the new method of WTS was described in detail in step-by-step in the Documentation.
 
