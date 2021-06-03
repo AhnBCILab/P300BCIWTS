@@ -3,6 +3,18 @@
 ## ↓↓ Click on the picture below to see the demonstration video of WTS!! ↓↓ ##
 [![Watch the video](https://img.youtube.com/vi/kmGgAUAVbds/maxresdefault.jpg)](https://youtu.be/kmGgAUAVbds)  
 
+**How to make good use of the repository**
+----------------------------------------
+1. WTS_Documentation allows naïve users to start this system step-by-step. 
+2. How_To_Experiment_by_using_New_WTS allows users to experiment with step-by-step. 
+3. Video clip on top of the readme to let the user-side see how the system works.
+4. You can check out the necessary modifications to add a new button in Tutorial_Add_New_button folder.
+5. The Within folder is a WTS that operates as a stepwise linear discriminant analysis (SWLDA) classifier, and Zero is a WTS that operates without training due to transfer learning. The latter case is under development.
+6. Survey program folder is a unity program for pre-survey, and Post_Survey folder is a unity program for post-survey.
+7. The DataAcquisition folder contains openvibe designer code that can only be used for data acquisition, and the RestingState folder contains openvibe designer code that can be used to measure eye open and eye close states.
+8. The PythonPackageInfo folder contains package information for each python version used in WTS. Please check WTS_Documentation for exact package information.
+9. WorldSystem\WorldDemo\Assets\Scripts\Blink.cs can be a starting point for understanding unity code. We have commented about this code in detail.
+
 **System Overview**
 -------------------
 ### World Tour System (WTS) is a world tour BCI application using P300 brain waves.
@@ -16,9 +28,11 @@
 ### ※ Update ※
 #### For using New WTS: Read "How_To_Experiment_by_using_New_WTS.pdf"
 #### Naive user and for using Old WTS: Read "WTS_Documentation.pdf"
-OpenViBE's Python Scripting box does not yet support Python 3. In a situation where the CNN model needs to be introduced in WTS, the system is divided into three modules to operate in order to use tensorflow in Python 3. The method of operating the new method of WTS was described in detail in step-by-step in the Documentation.
+~~OpenViBE's Python Scripting box does not yet support Python 3. In a situation where the CNN model needs to be introduced in WTS, the system is divided into three modules to operate in order to use tensorflow in Python 3. The method of operating the new method of WTS was described in detail in step-by-step in the Documentation.~~
 
-* If you want to use the old WTS, you can implement the function in SourceCode/ProcessingWorld.py and call the function in the second for statement in the def process part of Within/SourceCode/WorldOnline.py. Details are described in Documentation.
+Implementing it in the following(above) manner was a method when openvibe did not support Python 3. Python 3 is now available for openvibe's Python scripting box. I'm going to check and modify it as soon as possible.
+
+* If you want to use the current WTS, you can implement the function in SourceCode/ProcessingWorld.py and call the function in the second for statement in the def process part of Within/SourceCode/WorldOnline.py. Details are described in Documentation.
 
 ### WTS system proceeds as follows.
 ![WTS_Flowchart](./Image/WTS_Flowchart.jpg)
