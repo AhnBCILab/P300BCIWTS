@@ -18,7 +18,7 @@ public class Blink : MonoBehaviour
     public int random = 0;
     public string path = "";
 
-    public StimulusSender theSender = null;
+    public StimulusSender theSender = null; // Initialize the TCP instance into null
 
     ColorBlock cb;
     public Button NorthAmerica; //image to toggle
@@ -26,7 +26,7 @@ public class Blink : MonoBehaviour
     public Button Asia; //image to toggle
     public Button Africa; //image to toggle  
     public Button Oceania; //image to toggle 
-    public Button Europe; //image to toggle 
+    public Button Europe; //image to toggle
 
     public int num_of_blink_arrow = 2;
     public float current_time = 0.0f;
@@ -45,13 +45,10 @@ public class Blink : MonoBehaviour
     public byte buttonIndexNum = 0;
     int rndnum = 0;
 
-    public byte finish = 7;
-    public byte start = 8;
+    public byte finish = 7; // Marker to announce the end of the trial
+    public byte start = 8; // Marker to announce the start of the next trial
 
-    public int[] ranArr = { 0, 1, 2, 3, 4, 5 };
     public string output = "";
-    //string ipUIVAServer = "localhost";
-    //public UIVA_Client theClient = null;
 
     bool blinkstate = true;
     Button pubimg;
@@ -60,6 +57,7 @@ public class Blink : MonoBehaviour
 
     void Start()
     {
+        // If you have selected a total of 6 cities, it will return to the main menu.
         if (InputName.Try == 6)
         {
             InputName.Try = 0;
@@ -67,6 +65,7 @@ public class Blink : MonoBehaviour
             InputName.theListener.close();
         }
 
+        // Code to instruct to select a button at random
         random = UnityEngine.Random.Range(1, 7);
         switch (random)
         {
@@ -92,14 +91,17 @@ public class Blink : MonoBehaviour
                 break;
         }
         txt.text = "Look at " + path;
+        /////////////////////////////////////////////////
         
-        theSender = new StimulusSender();
+        // Generate a TCP instance
+        theSender = new StimulusSender(); // Generate a TCP instance used for button number sender
         theSender.open("localhost", 12140);
-        if (InputName.Try == 0)
+        if (InputName.Try == 0) // If this trial is the first of a session, 
         {
-            InputName.theListener = new StimulusSender();
+            InputName.theListener = new StimulusSender(); // Generate a TCP instance used to listen to signals from openvibe
             InputName.theListener.open("localhost", 12240);
         }
+        //////////////////////////
 
         cb.normalColor = new Color(132f, 132f, 132f, 255f);
         //cb.normalColor = Color.gray;
@@ -114,12 +116,13 @@ public class Blink : MonoBehaviour
     }
     private void Update()
     {
+        // If you press q, you return to the main menu.
         if (Input.GetKeyDown(KeyCode.Q))
         {
             SceneManager.LoadScene("Menu");
         }
         current_time += Time.deltaTime;
-        //Restart blinking
+        // Start blinking after 5 seconds
         if (current_time > 5.0f && blinkstate == true)
         {
             blinkstate = false;
@@ -133,36 +136,37 @@ public class Blink : MonoBehaviour
             BlinkButton();
         }
     }
-    public void BlinkButton()
+    // It minimizes the repeated blinking of the same button by making the 6 buttons blink once within each sequence(6 times) unconditionally.
+    // The variables controlling this is Button0 to Button5.
+    public void BlinkButton() 
     {
+        ////////////////////////////////////////////// If the total number of blinks has not been reached, /////////////////////////////////////////////////
         if (blinkcnt < BlinkCount)
         {
-            rndnum = UnityEngine.Random.Range(0, 6);
-            if (rndnum == 0 && Button0 == true)
+            rndnum = UnityEngine.Random.Range(0, 6); // Randomly generate one of the values ​​from 0 to 5
+            if (rndnum == 0 && Button0 == true) // If the generated random number is 0 and Button0 is true,
             {
-                Button0 = false;
-                buttonIndexNum = 1;
-                //theClient.Press_O(buttonIndexNum);
-                theSender.send(buttonIndexNum);
-                pubimg = NorthAmerica;
+                Button0 = false; // Change Button0 to false to indicate that the button0 is blinking
+                buttonIndexNum = 1; // Assign Button0 identifier to send to OpenViBE
+                theSender.send(buttonIndexNum); // Send the identifier to OpenViBE
+                pubimg = NorthAmerica; // 
 
-                if (isBlinking)
-                    return;
+                if (isBlinking) // If the previous button is not blinking successfully, isBlinking is true
+                    return; // Therefore, the system will stop through the return command.
                 if (pubimg != null)
                 {
-                    isBlinking = true;
-                    InvokeRepeating("ToggleState", startDelay, interval);
+                    isBlinking = true; // Indication of starting button blinking
+                    InvokeRepeating("ToggleState", startDelay, interval); // Code to make the actual button blink
                 }
             }
             else if (rndnum == 0 && Button0 == false)
             {
-                BlinkButton();
+                BlinkButton(); // Call BlinkButton again.
             }
-            else if (rndnum == 1 && Button1 == true)
+            else if (rndnum == 1 && Button1 == true) // Same as the first if statement
             {
                 Button1 = false;
                 buttonIndexNum = 2;
-                //theClient.Press_O(buttonIndexNum);
                 theSender.send(buttonIndexNum);
                 pubimg = Europe;
 
@@ -183,7 +187,6 @@ public class Blink : MonoBehaviour
             {
                 Button2 = false;
                 buttonIndexNum = 3;
-                //theClient.Press_O(buttonIndexNum);
                 theSender.send(buttonIndexNum);
                 pubimg = Asia;
 
@@ -204,7 +207,6 @@ public class Blink : MonoBehaviour
             {
                 Button3 = false;
                 buttonIndexNum = 4;
-                //theClient.Press_O(buttonIndexNum);
                 theSender.send(buttonIndexNum);
                 pubimg = SouthAmerica;
 
@@ -226,7 +228,6 @@ public class Blink : MonoBehaviour
             {
                 Button4 = false;
                 buttonIndexNum = 5;
-                //theClient.Press_O(buttonIndexNum);
                 theSender.send(buttonIndexNum);
                 pubimg = Africa;
 
@@ -248,7 +249,6 @@ public class Blink : MonoBehaviour
             {
                 Button5 = false;
                 buttonIndexNum = 6;
-                //theClient.Press_O(buttonIndexNum);
                 theSender.send(buttonIndexNum);
                 pubimg = Oceania;
 
@@ -267,6 +267,7 @@ public class Blink : MonoBehaviour
                 BlinkButton();
             }
 
+            // If all buttons blink, set the boolean value to true so that each button can blink again.
             if (Button0 == false && Button1 == false && Button2 == false && Button3 == false && Button4 == false && Button5 == false)
             {
                 Button0 = true;
@@ -277,20 +278,26 @@ public class Blink : MonoBehaviour
                 Button5 = true;
             }
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////// If the total number of flashes has been reached, /////////////////////////////////////////////////
         else
         {
             InputName.Try = InputName.Try + 1;
+            System.Threading.Thread.Sleep(1000); // Wait for 1 second. This latency is absolutely necessary to use the epoch for the last button blink.
+            theSender.send(finish); // Send a marker to inform OpenViBE that blinking is over
+            output = InputName.theListener.receive(); // Receive classification result from OpenViBE
+            theSender.send(start); // Send a marker to inform OpenViBE that blinking will be re-started in next trial.
+            theSender.close(); // Release a sender instance for the system reliability.
             System.Threading.Thread.Sleep(1000);
-            theSender.send(finish);
-            output = InputName.theListener.receive();
-            theSender.send(start);
-            theSender.close();
-            System.Threading.Thread.Sleep(1000);
+
+            // Write in the text file whether the classification result matched the target presented in current trial.
             FileStream f = new FileStream(Application.dataPath + "/StreamingAssets/" + InputName.patient_id + ".txt", FileMode.Append, FileAccess.Write);
             StreamWriter writer = new StreamWriter(f, System.Text.Encoding.Unicode);
             writer.WriteLine("Order: " + random + " / Result: " + output);
             writer.Close();
-            switch (output)
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            switch (output) // Scene movement according to target and classification result.
             {
                 case "1":
                     SceneManager.LoadScene("NorthAmerica");
@@ -314,23 +321,25 @@ public class Blink : MonoBehaviour
                     break;
             }
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     public void ToggleState()
     {
-        if (cb.normalColor == Color.gray)
+        if (cb.normalColor == Color.gray) // If the current button color is gray,
         {
-            cb.normalColor = Color.yellow;
+            cb.normalColor = Color.yellow; // Change its color to yellow so that the button blinks.
             pubimg.colors = cb;
         }
-        else
+        else // If the current button color is yellow,
         {
-            cb.normalColor = Color.gray;
+            cb.normalColor = Color.gray; // Change its color to gray to stop the button blinking.
             pubimg.colors = cb;
         }
         count++;
-        if (count == num_of_blink_arrow)
+        if (count == num_of_blink_arrow) // When the blinking is over, the count becomes 2.
         {
-            CancelInvoke();
+            CancelInvoke(); // Cancel invoking blinking function
+            // Increase the blink number
             blinkcnt++;
 
             if (rndnum == 0) noA++;
@@ -340,9 +349,9 @@ public class Blink : MonoBehaviour
             else if (rndnum == 4) Oce++;
             else Eur++;
 
-            count = 0;
-            isBlinking = false;
-            Invoke("BlinkButton", timebetweenarrows);
+            count = 0; // Reset the blinking indicator
+            isBlinking = false; // Assign false to the isBlinking variable to indicate that the button blinking has ended successfully.
+            Invoke("BlinkButton", timebetweenarrows); // Call the BlinkButton function again and proceed to make the next button blink.
         }
     }
 
