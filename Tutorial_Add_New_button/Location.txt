@@ -1,0 +1,10 @@
+** If you would like to use this example on your system, please move these files to the location below and check the contents of the manual so you can use it.
+
+OnlineGoBack
+- WorldSystem\WorldDemo\Assets\Scenes
+
+SWLDA_Main_GoBack
+- WorldSystem\Within\SourceCode
+
+WorldOnline_GoBack
+- WorldSystem\Within\SourceCode
