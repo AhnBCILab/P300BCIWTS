@@ -6,10 +6,10 @@ import hdf5storage
 from scipy.signal import butter, lfilter, sosfiltfilt
 import os, glob, time
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-# import matlab.engine
+import matlab.engine
 from datetime import datetime
-from sklearn.externals import joblib
-
+#from sklearn.externals import joblib
+import joblib
 
 def stepwise_selection(X, y, 
                        initial_list=[], 
@@ -148,16 +148,16 @@ def main():
         channelNum = 32
         downsampleRate = 4
         
-        ov_Path = "C:/Users/wldk5/WorldSystem/Within/Training/Data/"
+        ov_Path = "D:/WorldSystem/Within/Training/Data/"
         current_list = []
         current_list = sorted(glob.glob(ov_Path + '*.ov'), key=os.path.getmtime, reverse=True)
         ovfile_name = current_list[0]
         matfile_name = current_list[0][:-3] + ".mat"
         # matfile_name = "D:/WorldSystem/Within/Training\Data/Training-[2020.06.25-22.15.42].mat"
         
-        # print("current ov file path:", current_list[0])
-        # eng = matlab.engine.start_matlab()
-        # k = eng.convert_ov2mat(ovfile_name, matfile_name)
+        print("current ov file path:", current_list[0])
+        eng = matlab.engine.start_matlab()
+        k = eng.convert_ov2mat(ovfile_name, matfile_name)
         mat = hdf5storage.loadmat(matfile_name)
         channelNames = mat['channelNames']
         eegData = mat['eegData']

@@ -3,7 +3,7 @@
 
 function a = convert_ov2mat(inputOvFilename, outputMatFilename)
 
-	openvibeConvert = '"C:\Program Files (x86)\openvibe-2.1.0\openvibe-convert.cmd"';
+	openvibeConvert = '"C:\Program Files (x86)\openvibe-2.2.0\openvibe-convert.cmd"';
 	
 	csvFn = regexprep(inputOvFilename, '\.ov$', '\.csv');	
 	stimFn = regexprep(inputOvFilename, '\.ov$', '\.csv\.stims\.csv');	
