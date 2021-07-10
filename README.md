@@ -4,6 +4,7 @@
 [![Watch the video](https://img.youtube.com/vi/kmGgAUAVbds/maxresdefault.jpg)](https://youtu.be/kmGgAUAVbds)  
 
 **How to make good use of the repository**
+*(To get started quickly, follow along with How_To_Experiment_by_using_WTS.)*
 ----------------------------------------
 1. WTS_Documentation allows naïve users to start this system step-by-step. 
 2. How_To_Experiment_by_using_New_WTS allows users to experiment with step-by-step. 
