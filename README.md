@@ -36,11 +36,14 @@ Implementing it in the following(above) manner was a method when openvibe did no
 ### WTS system proceeds as follows.
 ![WTS_Flowchart](./Image/WTS_Flowchart.jpg)
 
-### Note
-#### We inform you that we do not take any responsibility for the consequences. However, we inform you that we used this system very well 
-
 ### See the WTS_Documentation.pdf file for details.
 ### Or contact BCI LAB: https://bcilab.handong.edu/contact
+
+**References**
+----------------------------------------
+* Woo, S., Lee, J., Kim, H., Chun, S., Lee, D., Gwon, D., & Ahn, M. (2021). An Open Source Based BCI Application for Virtual World Tour and its Usability Evaluation. Frontiers in Human Neuroscience, 15, 388.
+https://www.frontiersin.org/articles/10.3389/fnhum.2021.647839/full
+
 
 ### Video sources
 #### Europe
