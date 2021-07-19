@@ -3,6 +3,7 @@
 ## ↓↓ Click on the picture below to see the demonstration video of WTS!! ↓↓ ##
 [![Watch the video](https://img.youtube.com/vi/kmGgAUAVbds/maxresdefault.jpg)](https://youtu.be/kmGgAUAVbds)  
 
+
 **How to make good use of the repository**
 *(To get started quickly, see and follow How_To_Experiment_by_using_WTS first.)*
 ----------------------------------------
@@ -15,6 +16,7 @@
 7. The DataAcquisition folder contains openvibe designer code that can only be used for data acquisition, and the RestingState folder contains openvibe designer code that can be used to measure eye open and eye close states.
 8. The PythonPackageInfo folder contains package information for each python version used in WTS. Please check WTS_Documentation for exact package information.
 9. WorldSystem\WorldDemo\Assets\Scripts\Blink.cs can be a starting point for understanding unity code. We have commented about this code in detail.
+
 
 **System Overview**
 -------------------
@@ -39,10 +41,13 @@ Implementing it in the following(above) manner was a method when openvibe did no
 ### See the WTS_Documentation.pdf file for details.
 ### Or contact BCI LAB: https://bcilab.handong.edu/contact
 
+
 **References**
 ----------------------------------------
 * Woo, S., Lee, J., Kim, H., Chun, S., Lee, D., Gwon, D., & Ahn, M. (2021). An Open Source Based BCI Application for Virtual World Tour and its Usability Evaluation. Frontiers in Human Neuroscience, 15, 388.
 https://www.frontiersin.org/articles/10.3389/fnhum.2021.647839/full
+
+
 
 
 ### Video sources
